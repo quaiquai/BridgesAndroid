@@ -14,8 +14,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         //setContentView(R.layout.activity_main);
         bridgesview = new BridgesView(this);
-        bridgesview.setShape("square");
-        bridgesview.setShape("oval");
+        bridgesview.setShape("square", 2, 2);
         setContentView(bridgesview);
     }
 }
