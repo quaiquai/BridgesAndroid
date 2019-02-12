@@ -28,8 +28,8 @@ public class BridgesView extends View {
     private int gridHeight;
 
     // Sprite width and height set dynamically based on screen size.
-    private int spriteWidth;
-    private int spriteHeight;
+    private int cellWidth;
+    private int cellHeight;
 
     // Width and height of the display in pixels.
     private int displayWidth;
@@ -40,7 +40,15 @@ public class BridgesView extends View {
     // loaded into the updatedBitShape object after the dimensions have been determined.
     private Bitmap updatedSprite;
 
-    private int buttonWidth;
+    // Button values set after the grid has been built so that the left over space for buttons
+    // can be set dynamically.
+    private int buttonSpaceWidth;
+    private Bitmap btnLeft;
+    private Bitmap btnRight;
+    private Bitmap btnUp;
+    private Bitmap btnDown;
+    private Bitmap btnX;
+    private Bitmap btnY;
 
     private int WIDTH;
     private int HEIGHT;
@@ -66,10 +74,11 @@ public class BridgesView extends View {
 
         for (int i = 0; i < gridWidth; i++) {
             for (int j = 0; j < gridHeight; j++) {
-                canvas.drawBitmap(updatedSprite, ((i * spriteWidth)+(buttonWidth/2)), (j * spriteHeight), null);
+                canvas.drawBitmap(updatedSprite, ((i * cellWidth)+(buttonSpaceWidth/2)), (j * cellHeight), null);
             }
         }
 
+        generateButtonMappings(canvas);
     }
 
     public void generateGridParams(int width, int height, String baseShape){
@@ -87,6 +96,8 @@ public class BridgesView extends View {
         setSpriteHeight(displayHeight);
         // Get sprite
         setShape(baseShape);
+
+        generateButtons();
     }
 
     // Set display and point object.
@@ -105,8 +116,8 @@ public class BridgesView extends View {
     // Save 1/3rd of the width space for buttons. This will be split in half to have space
     // on both sides of the grid.
     public void setDisplayWidth(int w){
-        buttonWidth = w/3;
-        displayWidth = w-buttonWidth;
+        buttonSpaceWidth = w/3;
+        displayWidth = w-buttonSpaceWidth;
     }
     public void setDisplayHeight(int h){
         displayHeight = h;
@@ -132,13 +143,13 @@ public class BridgesView extends View {
         int baseDimensionWidth = 90;
         int baseSpriteWidth = 3;
         int scaleValueWidth = targetDisplayW/baseDimensionWidth;
-        spriteWidth = baseSpriteWidth * scaleValueWidth;
+        cellWidth = baseSpriteWidth * scaleValueWidth;
     }
     public void setSpriteHeight(int targetDisplayH){
         int baseDimensionHeight = 90;
         int baseSpriteHeight = 3;
         int scaleValueHeight = targetDisplayH/baseDimensionHeight;
-        spriteHeight = baseSpriteHeight * scaleValueHeight;
+        cellHeight = baseSpriteHeight * scaleValueHeight;
     }
 
     public void setShape(String sh, int w, int h){
@@ -157,7 +168,7 @@ public class BridgesView extends View {
 
         }
         // Resize the sprite to fill one space in the grid.
-        updatedSprite = Bitmap.createScaledBitmap(randShape, spriteWidth, spriteHeight, false);
+        updatedSprite = Bitmap.createScaledBitmap(randShape, cellWidth, cellHeight, false);
     }
 
     public void setShape(String sh){
@@ -173,7 +184,66 @@ public class BridgesView extends View {
 
         }
         // Resize the sprite to fill one space in the grid.
-        updatedSprite = Bitmap.createScaledBitmap(randShape, spriteWidth, spriteHeight, false);
+        updatedSprite = Bitmap.createScaledBitmap(randShape, cellWidth, cellHeight, false);
+    }
+
+    // Generates the buttons including images and sizes creating buttons 2x the size of the grid
+    // cells so they can be clicked easily.
+    public void generateButtons(){
+        btnLeft = BitmapFactory.decodeResource(getResources(), R.drawable.left);
+        btnLeft = Bitmap.createScaledBitmap(btnLeft, (cellWidth*2), (cellHeight*2), false);
+        btnRight = BitmapFactory.decodeResource(getResources(), R.drawable.right);
+        btnRight = Bitmap.createScaledBitmap(btnRight, (cellWidth*2), (cellHeight*2), false);
+        btnUp = BitmapFactory.decodeResource(getResources(), R.drawable.up);
+        btnUp = Bitmap.createScaledBitmap(btnUp, (cellWidth*2), (cellHeight*2), false);
+        btnDown = BitmapFactory.decodeResource(getResources(), R.drawable.down);
+        btnDown = Bitmap.createScaledBitmap(btnDown, (cellWidth*2), (cellHeight*2), false);
+        btnX = BitmapFactory.decodeResource(getResources(), R.drawable.x);
+        btnX = Bitmap.createScaledBitmap(btnX, (cellWidth*2), (cellHeight*2), false);
+        btnY = BitmapFactory.decodeResource(getResources(), R.drawable.y);
+        btnY = Bitmap.createScaledBitmap(btnY, (cellWidth*2), (cellHeight*2), false);
+    }
+
+    // Partitions the button space to determine where on the screen the buttons will sit in relation
+    // to the game grid.dio
+    public void generateButtonMappings(Canvas c){
+        int cellHeightDouble = cellHeight+cellHeight;
+        int cellWidthDouble = cellWidth+cellWidth;
+        int horizontalLineCenter = displayHeight/2;
+        int leftPaneVerticalLineCenter = (buttonSpaceWidth/4)+20;
+        int rightPaneVerticalLineCenter = displayWidth+(buttonSpaceWidth/2);
+
+        int btnLeftLeft = (leftPaneVerticalLineCenter/2)-cellWidthDouble;
+        int btnLeftTop = horizontalLineCenter;
+
+        int btnRightLeft = btnLeftLeft+(cellWidthDouble*2);
+        int btnRightTop = btnLeftTop;
+
+        int btnUpLeft = btnLeftLeft+cellWidthDouble;
+        int btnUpTop = btnLeftTop-cellHeightDouble;
+
+        int btnDownLeft = btnLeftLeft+cellWidthDouble;
+        int btnDownTop = btnLeftTop+cellHeightDouble;
+
+        int btnXLeft = rightPaneVerticalLineCenter+cellWidthDouble;
+        int btnXTop = horizontalLineCenter-cellHeightDouble;
+
+        int btnYLeft = btnXLeft - cellWidthDouble;
+        int btnYTop = horizontalLineCenter+cellHeightDouble;
+
+        c.drawBitmap(btnDown, btnDownLeft, btnDownTop, null);
+        c.drawBitmap(btnUp, btnUpLeft, btnUpTop, null);
+        c.drawBitmap(btnRight, btnRightLeft, btnRightTop, null);
+        c.drawBitmap(btnLeft, btnLeftLeft, btnLeftTop, null);
+        c.drawBitmap(btnX, btnXLeft, btnXTop, null);
+        c.drawBitmap(btnY, btnYLeft, btnYTop, null);
+    }
+
+    public Bitmap getUpBtn(){
+        return btnUp;
+    }
+    public Bitmap getDownBtn(){
+        return btnDown;
     }
 
     protected Bitmap createSubImageAt(int row, int col, int w, int h)  {
