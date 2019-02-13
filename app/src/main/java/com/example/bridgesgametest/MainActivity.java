@@ -1,6 +1,8 @@
 package com.example.bridgesgametest;
 
 import android.content.pm.ActivityInfo;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -13,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
     // player starts here on grid. Number between 1 and 900.
     private int startingSpace = 40;
     private int curCellNum;
+    //private int curCellNum2;
 
     // Image view objects to give buttons onclick listeners
     private ImageView arrowUp;
@@ -25,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     // Object that represents current player space. Can be anywhere from 1 to 900 for
     // the 30x30 board.
     private ImageView currentCell;
+    //private ImageView currentCell2;
     private ImageView upCell;
     private ImageView downCell;
     private ImageView leftCell;
@@ -105,6 +109,7 @@ public class MainActivity extends AppCompatActivity {
     private void setSpaces(int curNum){
         // The integer represents a game grid cell from 1 to 900 on a 30x30 grid.
         curCellNum = curNum;
+        //curCellNum2 = curNum+1;
         int upCellNum = curCellNum-30;
         int downCellNum = curCellNum+30;
         int leftCellNum = curCellNum-1;
@@ -132,7 +137,12 @@ public class MainActivity extends AppCompatActivity {
         rightCell = (ImageView) findViewById(rightCellID);
 
         // Turns the cell at the users position into the blue square image.
+        currentCell.setBackgroundColor(Color.rgb(100, 100, 50));
         currentCell.setImageResource(R.drawable.blue_square);
+//        String curCellName2 = "gameCell"+curCellNum2;
+//        int curCellID2 = getResources().getIdentifier(curCellName2, "id", getPackageName());
+//        currentCell2 = (ImageView) findViewById(curCellID2);
+//        currentCell2.setColorFilter(android.graphics.Color.BLACK, PorterDuff.Mode.MULTIPLY);
     }
 
 }
