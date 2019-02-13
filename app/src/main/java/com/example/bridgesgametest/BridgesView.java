@@ -19,6 +19,7 @@ public class BridgesView extends SurfaceView implements SurfaceHolder.Callback {
 
     private CharacterSprite characterSprite;
     private CharacterSprite characterSprite2;
+    private GameGrid gameGrid;
 
     private ShapeDrawable shape;
     private Bitmap randShape;
@@ -49,6 +50,7 @@ public class BridgesView extends SurfaceView implements SurfaceHolder.Callback {
     private int WIDTH;
     private int HEIGHT;
 
+    private Activity activity;
     private Bitmap bitmapImage;
 
 
@@ -71,7 +73,8 @@ public class BridgesView extends SurfaceView implements SurfaceHolder.Callback {
     public void surfaceCreated(SurfaceHolder holder) {
         thread.setRunning(true);
         thread.start();
-        characterSprite = new CharacterSprite(BitmapFactory.decodeResource(getResources(),R.drawable.white_square), 100, 100);
+        //characterSprite = new CharacterSprite(BitmapFactory.decodeResource(getResources(),R.drawable.white_square), 100, 100);
+        gameGrid = new GameGrid(getContext(),30,30);
     }
 
     @Override
@@ -97,9 +100,8 @@ public class BridgesView extends SurfaceView implements SurfaceHolder.Callback {
         super.draw(canvas);
         if (canvas != null) {
             canvas.drawColor(Color.WHITE);
-            characterSprite.draw(canvas);
-            characterSprite2  = new CharacterSprite(BitmapFactory.decodeResource(getResources(),R.drawable.white_square), 50, 50);
-            characterSprite2.draw(canvas);
+            //characterSprite.draw(canvas);
+            gameGrid.draw(canvas, 20,20);
         }
     }
 
