@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Point;
+import android.graphics.drawable.shapes.RectShape;
 import android.view.Display;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.ShapeDrawable;
@@ -159,6 +160,10 @@ public class GameGrid {
 
     public void setShape(String sh){
         switch(sh){
+            case "square":
+                shape = new ShapeDrawable(new RectShape());
+                shape.getPaint().setColor(0xff74AC23);
+                shape.setBounds(spriteHeight, spriteWidth, spriteHeight, spriteWidth);
             case "oval":
                 shape = new ShapeDrawable(new OvalShape());
                 shape.getPaint().setColor(0xff74AC23);
