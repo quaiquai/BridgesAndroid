@@ -301,6 +301,7 @@ public class MainActivity extends AppCompatActivity {
     private void movePlayer(int newNum, int dir){
 
         newNum = newNum + dir;
+        checkForSquish();
 
         if (newNum == curCellNum || newNum < 1 || newNum > 900){
             // Grid bounds reached or player has not moved.
