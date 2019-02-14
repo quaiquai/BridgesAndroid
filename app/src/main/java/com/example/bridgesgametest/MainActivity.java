@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TableLayout;
 import android.widget.TextView;
 
 import java.util.Random;
@@ -55,6 +56,10 @@ public class MainActivity extends AppCompatActivity {
     private int playerSprite;
     private int bugSprite;
 
+    // Background color.
+    private TableLayout base;
+    Color bColor;
+
     // Handler for enemy loop management. A higher number is slower
     private Handler h = new Handler();
     private int bugSpeed = 9000;
@@ -71,10 +76,10 @@ public class MainActivity extends AppCompatActivity {
 
         // Set sprite preferences for player sprite, bug sprite, and grid background sprite. Set speed of player and bug generation.
         // Smaller numbers mean faster movement.
-        setGamePreferences("pixel_guy", "bug", "white_square", 10000, 100);
+        setGamePreferences("pixel_guy", "bug", Color.BLUE, 10000, 100);
 
-        // Set initial spaces using predetermined starting position.
-        setPlayerSpace(40);
+        // Set playerStart position
+        setPlayerStartPosition(40);
 
         // Below are the click listeners for six buttons representing a d-pad and x and y buttons
         arrowUp = (ImageView) findViewById(R.id.btnUp);
@@ -195,27 +200,14 @@ public class MainActivity extends AppCompatActivity {
             }
         }, bugSpeed);
         // After delay move character.
-        moveCharacter();
-    }
-
-    // Character moves in the direction clicked at the speed set by the player.
-    // These speeds can be used to signify difficulty levels for the game.
-    protected void moveCharacter(){
-        h.postDelayed(new Runnable(){
-            public void run(){
-                if (move) {
-                    setPlayerSpace(curCellNum + direction);
-                }
-                h.postDelayed(this, playerSpeed);
-            }
-        }, playerSpeed);
+        movePlayerTimer();
     }
 
     private void makeBug(){
         // Takes space from current bug location and returns it to empty grid sprite.
         int prevBugID = getResources().getIdentifier(("gameCell"+bugCurLoc), "id", getPackageName());
         ImageView prevBugSpace = (ImageView) findViewById(prevBugID);
-        prevBugSpace.setImageResource(gridSprite);
+        prevBugSpace.setImageResource(android.R.color.transparent);
 
         // Gets random new location for bug.
         Random r = new Random();
@@ -233,7 +225,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // Allows a student to alter the look and speed of the game.
-    private void setGamePreferences(String pSprite, String bSprite, String gSprite, int bSpeed, int pSpeed){
+    private void setGamePreferences(String pSprite, String bSprite, int gColor, int bSpeed, int pSpeed){
 
         // Player speed and bug generation speed.
         bugSpeed = bSpeed;
@@ -242,54 +234,96 @@ public class MainActivity extends AppCompatActivity {
         // Set sprites.
         playerSprite = getResources().getIdentifier(pSprite, "drawable", getPackageName());
         bugSprite = getResources().getIdentifier(bSprite, "drawable", getPackageName());
-        gridSprite = getResources().getIdentifier(gSprite, "drawable", getPackageName());
+
+        // Set grid background object.
+        base = (TableLayout) findViewById(R.id.gridBase);
+        // Change grid color
+        setBackgroundColor(gColor);
+    }
+
+    // Set background color with Color.ColorName value.
+    private void setBackgroundColor(int c){
+        base.setBackgroundColor(c);
+    }
+
+    // Set background color with argb value
+    private void setBackgroundColor(int a, int r, int g, int b){
+        base.setBackgroundColor(Color.argb(a,r,g,b));
+    }
+
+    // setPlayerSprite from drawable resources where pSprite is the name of the image without the file extension.
+    private void setPlayerSprite(String pSprite){
+        playerSprite = getResources().getIdentifier(pSprite, "drawable", getPackageName());
+    }
+
+    // Sets the sprite for the bug using drawable resource. String is name of image without file extension.
+    private void setBugSprite(String bSprite){
+        bugSprite = getResources().getIdentifier(bSprite, "drawable", getPackageName());
+    }
+
+    // Sets speed of player motion, the higher the number the slower the player moves.
+    private void setPlayerSpeed(int pSpeed){
+        playerSpeed = pSpeed;
+    }
+
+    // Sets speed of bug motion, the higher the number the slower the bug refreshes.
+    private void setBugSpeed(int bSpeed){
+        bugSpeed = bSpeed;
+    }
+
+    // Set player starting position.
+    private void setPlayerStartPosition(int sp){
+        // Gets ImageVew at int sp position.
+        int curCellID = getResources().getIdentifier(("gameCell"+sp), "id", getPackageName());
+        currentCell = (ImageView) findViewById(curCellID);
+        // Turns the cell at the users position into the chosen player sprite.
+        currentCell.setImageResource(playerSprite);
+        // Set Activitys current position value.
+        curCellNum = sp;
+    }
+
+    // Character moves in the direction clicked at the speed set by the player.
+    // These speeds can be used to signify difficulty levels for the game.
+    protected void movePlayerTimer(){
+        h.postDelayed(new Runnable(){
+            public void run(){
+                if (move) {
+                    movePlayer(curCellNum, direction);
+                }
+                h.postDelayed(this, playerSpeed);
+            }
+        }, playerSpeed);
     }
 
     // This method takes in the users current position on the game grid sized 30x30.
     // It then preDetermines the spaces the player can move from this position and sets
     // their ID values.
-    private void setPlayerSpace(int curNum){
+    private void movePlayer(int newNum, int dir){
 
-        if (curNum == curCellNum || curNum < 1 || curNum > 900){
+        newNum = newNum + dir;
+
+        if (newNum == curCellNum || newNum < 1 || newNum > 900){
             // Grid bounds reached or player has not moved.
         } else {
             // The integer represents a game grid cell from 1 to 900 on a 30x30 grid.
+            // The current sell is now the previous cell and the new cell is the newNum value.
             prevCellNum = curCellNum;
-            curCellNum = curNum;
-            int upCellNum = curCellNum-30;
-            int downCellNum = curCellNum+30;
-            int leftCellNum = curCellNum-1;
-            int rightCellNum = curCellNum+1;
-
-            // Checks if the user has hit the bug and adds to the score if true.
-            checkForSquish();
+            curCellNum = newNum;
 
             // All the cells are named gameCell[] with [] being a number between 1 and 900.
             String prevCellName = "gameCell"+prevCellNum;
             String curCellName = "gameCell"+curCellNum;
-            String upCellName = "gameCell"+upCellNum;
-            String downCellName = "gameCell"+downCellNum;
-            String leftCellName = "gameCell"+leftCellNum;
-            String rightCellName = "gameCell"+rightCellNum;
 
             // Get the ID of the game cells in play.
             int prevCellID = getResources().getIdentifier(prevCellName, "id", getPackageName());
             int curCellID = getResources().getIdentifier(curCellName, "id", getPackageName());
-            int upCellID = getResources().getIdentifier(upCellName, "id", getPackageName());
-            int downCellID = getResources().getIdentifier(downCellName, "id", getPackageName());
-            int leftCellID = getResources().getIdentifier(leftCellName, "id", getPackageName());
-            int rightCellID = getResources().getIdentifier(rightCellName, "id", getPackageName());
 
-            // Sets the current space object and spaces around the current space
+            // Sets the current space object and prev space object so the sprites can be updated.
             prevCell = (ImageView) findViewById(prevCellID);
             currentCell = (ImageView) findViewById(curCellID);
-            upCell = (ImageView) findViewById(upCellID);
-            downCell = (ImageView) findViewById(downCellID);
-            leftCell = (ImageView) findViewById(leftCellID);
-            rightCell = (ImageView) findViewById(rightCellID);
 
             // reverts the previous cell to the grid base sprite
-            prevCell.setImageResource(gridSprite);
+            prevCell.setImageResource(android.R.color.transparent);
 
             // Turns the cell at the users position into the chosen player sprite.
             currentCell.setImageResource(playerSprite);
