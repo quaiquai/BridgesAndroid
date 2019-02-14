@@ -35,14 +35,24 @@ public class MainActivity extends AppCompatActivity {
     // Cell as object for bug.
     private ImageView bugCell;
 
-    // Integer to change directions in grid.
-    private int direction;
+    // Handler for enemy loop management. A higher number is slower
+    private Handler h = new Handler();
+
+    // Player and bug speed. Higher number is slower.
     private int playerSpeed = 100;
+    private int bugSpeed = 9000;
+
+    // Integer to change directions in grid.
+    // 0 means not moving, 1 moves player right, -1 moves player left,
+    // -30 moves player up, 30 moves player down.
+    // Boolean also needs to be true for the loop to run.
+    private int direction = 0;
     private boolean move = false;
 
-    // player starts here on grid. Number between 1 and 900.
-    private int curPlayerLocation = 1;
-    private int prevPlayerLocation;
+    // Player locations on grid. Number between 1 and 900.
+    // Default at space 2
+    private int curPlayerLocation = 2;
+    private int prevPlayerLocation = 2;
 
     // Bug current location on grid. Number 1 through 900 on a 30x30 board.
     private int curBugLocation = 1;
@@ -50,10 +60,6 @@ public class MainActivity extends AppCompatActivity {
     // Base sprite choices.
     private int playerSprite;
     private int bugSprite;
-
-    // Handler for enemy loop management. A higher number is slower
-    private Handler h = new Handler();
-    private int bugSpeed = 9000;
 
     // Score counter
     public int score = 0;
@@ -74,6 +80,12 @@ public class MainActivity extends AppCompatActivity {
 
         // Below are the click listeners for six buttons representing a d-pad and x and y buttons
         arrowUp = (ImageView) findViewById(R.id.btnUp);
+        arrowDown = (ImageView) findViewById(R.id.btnDown);
+        arrowLeft = (ImageView) findViewById(R.id.btnLeft);
+        arrowRight = (ImageView) findViewById(R.id.btnRight);
+        xButton = (ImageView) findViewById(R.id.btnX);
+        yButton = (ImageView) findViewById(R.id.btnY);
+
         arrowUp.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -97,7 +109,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        arrowDown = (ImageView) findViewById(R.id.btnDown);
         arrowDown.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -117,7 +128,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        arrowLeft = (ImageView) findViewById(R.id.btnLeft);
         arrowLeft.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -137,7 +147,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        arrowRight = (ImageView) findViewById(R.id.btnRight);
         arrowRight.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -157,14 +166,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        xButton = (ImageView) findViewById(R.id.btnX);
         xButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
 
             }
         });
 
-        yButton = (ImageView) findViewById(R.id.btnY);
         yButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
 
@@ -238,6 +245,32 @@ public class MainActivity extends AppCompatActivity {
     // Set background color with argb value
     private void setBackgroundColor(int a, int r, int g, int b){
         base.setBackgroundColor(Color.argb(a,r,g,b));
+    }
+
+    // Allows student to change the images used for the buttons.
+    private void setUpButtonSprite(String ubs){
+        int arrowUpID = getResources().getIdentifier(ubs, "drawable", getPackageName());
+        arrowUp = (ImageView) findViewById(arrowUpID);
+    }
+    private void setDownButtonSprite(String dbs){
+        int arrowDownID = getResources().getIdentifier(dbs, "drawable", getPackageName());
+        arrowDown = (ImageView) findViewById(arrowDownID);
+    }
+    private void setLeftButtonSprite(String lbs){
+        int arrowLeftID = getResources().getIdentifier(lbs, "drawable", getPackageName());
+        arrowLeft = (ImageView) findViewById(arrowLeftID);
+    }
+    private void setRightButtonSprite(String rbs){
+        int arrowRightID = getResources().getIdentifier(rbs, "drawable", getPackageName());
+        arrowRight = (ImageView) findViewById(arrowRightID);
+    }
+    private void setXButtonSprite(String xbs){
+        int arrowXID = getResources().getIdentifier(xbs, "drawable", getPackageName());
+        xButton = (ImageView) findViewById(arrowXID);
+    }
+    private void setYButtonSprite(String ybs){
+        int arrowYID = getResources().getIdentifier(ybs, "drawable", getPackageName());
+        yButton = (ImageView) findViewById(arrowYID);
     }
 
     // setPlayerSprite from drawable resources where pSprite is the name of the image without the file extension.
