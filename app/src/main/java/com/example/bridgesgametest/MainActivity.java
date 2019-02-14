@@ -15,10 +15,6 @@ import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
-    // player starts here on grid. Number between 1 and 900.
-    private int curCellNum = 1;
-    private int prevCellNum;
-
     // Image view objects to give buttons onclick listeners
     private ImageView arrowUp;
     private ImageView arrowDown;
@@ -27,38 +23,33 @@ public class MainActivity extends AppCompatActivity {
     private ImageView xButton;
     private ImageView yButton;
 
+    // TableLayout object that holds the grid cells.
+    private TableLayout base;
+
+    // Grid cell as object for players current and previous location
+    // (so previous location can be reset).
+    // Can be anywhere from 1 to 900 for a 30x30 board.
+    private ImageView prevCell;
+    private ImageView currentCell;
+
+    // Cell as object for bug.
+    private ImageView bugCell;
+
     // Integer to change directions in grid.
     private int direction;
     private int playerSpeed = 100;
     private boolean move = false;
 
-    // Object that represents current player space. Can be anywhere from 1 to 900 for
-    // the 30x30 board.
-    private ImageView prevCell;
-    private ImageView currentCell;
-    private ImageView upCell;
-    private ImageView downCell;
-    private ImageView leftCell;
-    private ImageView rightCell;
+    // player starts here on grid. Number between 1 and 900.
+    private int curPlayerLocation = 1;
+    private int prevPlayerLocation;
 
-    // Image view object for bug.
-    private ImageView bugCell;
-
-    // Cell size set dynamically so the grid can fit on different screen sizes
-    int cellWidth;
-    int cellHeight;
-
-    // Bug current location so its space can be cleared after it moves.
-    private int bugCurLoc = 1;
+    // Bug current location on grid. Number 1 through 900 on a 30x30 board.
+    private int curBugLocation = 1;
 
     // Base sprite choices.
-    private int gridSprite;
     private int playerSprite;
     private int bugSprite;
-
-    // Background color.
-    private TableLayout base;
-    Color bColor;
 
     // Handler for enemy loop management. A higher number is slower
     private Handler h = new Handler();
@@ -205,7 +196,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void makeBug(){
         // Takes space from current bug location and returns it to empty grid sprite.
-        int prevBugID = getResources().getIdentifier(("gameCell"+bugCurLoc), "id", getPackageName());
+        int prevBugID = getResources().getIdentifier(("gameCell"+curBugLocation), "id", getPackageName());
         ImageView prevBugSpace = (ImageView) findViewById(prevBugID);
         prevBugSpace.setImageResource(android.R.color.transparent);
 
@@ -216,12 +207,10 @@ public class MainActivity extends AppCompatActivity {
         // Places new bug at new location between 1 and 900 on game grid.
         int bugCellID = getResources().getIdentifier(("gameCell"+bugNewLoc), "id", getPackageName());
         bugCell = (ImageView) findViewById(bugCellID);
-        bugCell.setMaxHeight(cellHeight);
-        bugCell.setMaxWidth(cellWidth);
         bugCell.setImageResource(bugSprite);
 
         // Sets new current location.
-        bugCurLoc = bugNewLoc;
+        curBugLocation = bugNewLoc;
     }
 
     // Allows a student to alter the look and speed of the game.
@@ -279,7 +268,7 @@ public class MainActivity extends AppCompatActivity {
         // Turns the cell at the users position into the chosen player sprite.
         currentCell.setImageResource(playerSprite);
         // Set Activitys current position value.
-        curCellNum = sp;
+        curPlayerLocation = sp;
     }
 
     // Character moves in the direction clicked at the speed set by the player.
@@ -288,7 +277,7 @@ public class MainActivity extends AppCompatActivity {
         h.postDelayed(new Runnable(){
             public void run(){
                 if (move) {
-                    movePlayer(curCellNum, direction);
+                    movePlayer(curPlayerLocation, direction);
                 }
                 h.postDelayed(this, playerSpeed);
             }
@@ -303,17 +292,17 @@ public class MainActivity extends AppCompatActivity {
         newNum = newNum + dir;
         checkForSquish();
 
-        if (newNum == curCellNum || newNum < 1 || newNum > 900){
+        if (newNum == curPlayerLocation || newNum < 1 || newNum > 900){
             // Grid bounds reached or player has not moved.
         } else {
             // The integer represents a game grid cell from 1 to 900 on a 30x30 grid.
             // The current sell is now the previous cell and the new cell is the newNum value.
-            prevCellNum = curCellNum;
-            curCellNum = newNum;
+            prevPlayerLocation = curPlayerLocation;
+            curPlayerLocation = newNum;
 
             // All the cells are named gameCell[] with [] being a number between 1 and 900.
-            String prevCellName = "gameCell"+prevCellNum;
-            String curCellName = "gameCell"+curCellNum;
+            String prevCellName = "gameCell"+prevPlayerLocation;
+            String curCellName = "gameCell"+curPlayerLocation;
 
             // Get the ID of the game cells in play.
             int prevCellID = getResources().getIdentifier(prevCellName, "id", getPackageName());
@@ -333,14 +322,14 @@ public class MainActivity extends AppCompatActivity {
 
     // checks to see if player and bug are in the same cell. If true, increment score and update score TextView.
     private void checkForSquish(){
-        if (bugCurLoc == curCellNum){
+        if (curBugLocation == curPlayerLocation){
             score++;
             String scoreString = ""+score;
             TextView sV = (TextView) findViewById(R.id.scoreView);
             sV.setText(scoreString);
 
             // crude way to remove the bug location so the player can't go back and forth over that space adn get points.
-            bugCurLoc = 1;
+            curBugLocation = 1;
         }
     }
 }
