@@ -213,7 +213,7 @@ public class MainActivity extends AppCompatActivity {
         curBugLocation = bugNewLoc;
     }
 
-    // Allows a student to alter the look and speed of the game.
+    // Allows a student to alter the look and speed of the game at one time
     private void setGamePreferences(String pSprite, String bSprite, int gColor, int bSpeed, int pSpeed){
 
         // Player speed and bug generation speed.
@@ -267,7 +267,7 @@ public class MainActivity extends AppCompatActivity {
         currentCell = (ImageView) findViewById(curCellID);
         // Turns the cell at the users position into the chosen player sprite.
         currentCell.setImageResource(playerSprite);
-        // Set Activitys current position value.
+        // Set Activities current position value.
         curPlayerLocation = sp;
     }
 
