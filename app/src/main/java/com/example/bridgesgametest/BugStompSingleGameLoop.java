@@ -20,15 +20,14 @@ public class BugStompSingleGameLoop extends AppCompatActivity {
     private ImageView arrowDown;
     private ImageView arrowLeft;
     private ImageView arrowRight;
-    private ImageView xButton;
-    private ImageView yButton;
+    private ImageView xButton;// not yet implemented
+    private ImageView yButton;// not yet implemented
 
     // TableLayout object that holds the grid cells.
     private TableLayout base;
 
     // Grid cell as object for players current and previous location
-    // (so previous location can be reset).
-    // Can be anywhere from 1 to 900 for a 30x30 board.
+    // so previous location can be reset when player moves.
     private ImageView prevCell;
     private ImageView currentCell;
 
@@ -52,15 +51,13 @@ public class BugStompSingleGameLoop extends AppCompatActivity {
     private boolean move;
 
     // Player locations on grid. Number between 1 and 900.
-    // Default at space 2
     private int curPlayerLocation;
     private int prevPlayerLocation;
 
     // Bug current location on grid. Number 1 through 900 on a 30x30 board.
-    // Default space 800
     private int curBugLocation;
 
-    // Base sprite choices.
+    // IDs for selected sprites.
     private int playerSprite;
     private int bugSprite;
 
@@ -73,9 +70,13 @@ public class BugStompSingleGameLoop extends AppCompatActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         setContentView(R.layout.activity_main);
 
+        // Creates onTouch listeners for each button.
         setButtonObjectListeners();
+
+        // Default game values for testing.
         useDefaultGameValues();
 
+        // Loop that runs the game after values have been initialized.
         gameLoop();
     }
 
@@ -83,8 +84,17 @@ public class BugStompSingleGameLoop extends AppCompatActivity {
         h.postDelayed(new Runnable(){
             public void run(){
 
-                frameCount++;
+                // Moves player to current location + direction.
+                // Basic directions are -1 for left, 1 right, -30 up, 30 down.
+                // Player can also move to different parts of the board by setting the
+                // direction value to different numbers. The move player function is set not to
+                // move the player outside of the grid bounds even if these values exceed the grid size.
                 movePlayer(curPlayerLocation, direction);
+
+                // The bug doesn't move every frame or it would be too fast.
+                // Moving every 80 frames when the fps delay is 30 seems
+                // to be an average speed.
+                frameCount++;
                 if (frameCount == 80){
                     makeBug();
                     frameCount = 0;
@@ -94,6 +104,8 @@ public class BugStompSingleGameLoop extends AppCompatActivity {
         }, fps);
     }
 
+    // Sets game default values for speed, and look of the game so that we can test functionality of new
+    // methods without having to worry about game appearance.
     public void useDefaultGameValues(){
 
         setPlayerSprite("pixel_guy");
@@ -154,23 +166,33 @@ public class BugStompSingleGameLoop extends AppCompatActivity {
 
     // Set player starting position.
     public void setPlayerStartPosition(int sp){
-        curPlayerLocation = sp;
-        prevPlayerLocation = sp;
-        // Gets ImageVew at int sp position.
-        int curCellID = getResources().getIdentifier(("gameCell"+sp), "id", getPackageName());
-        currentCell = (ImageView) findViewById(curCellID);
-        // Turns the cell at the users position into the chosen player sprite.
-        currentCell.setImageResource(playerSprite);
-        // Set Activities current position value.
+        if(sp > 0 && sp < 901) {
+            curPlayerLocation = sp;
+            prevPlayerLocation = sp;
+            // Gets ImageVew at int sp position.
+            int curCellID = getResources().getIdentifier(("gameCell" + sp), "id", getPackageName());
+            currentCell = (ImageView) findViewById(curCellID);
+            // Turns the cell at the users position into the chosen player sprite.
+            currentCell.setImageResource(playerSprite);
+            // Set Activities current position value.
+        }else{
+            setPlayerStartPosition(30);
+        }
     }
 
+    // Sets the initial position of the bug sprite on the grid.
     public void setBugStartPosition(int bsp){
-        curBugLocation = bsp;
-        int curCellID = getResources().getIdentifier(("gameCell"+bsp), "id", getPackageName());
-        bugCell = (ImageView) findViewById(curCellID);
-        bugCell.setImageResource(bugSprite);
+        if(bsp > 0 && bsp < 901) {
+            curBugLocation = bsp;
+            int curCellID = getResources().getIdentifier(("gameCell" + bsp), "id", getPackageName());
+            bugCell = (ImageView) findViewById(curCellID);
+            bugCell.setImageResource(bugSprite);
+        }else{
+            setBugStartPosition(2);
+        }
     }
 
+    // Removes old bug sprite and places a new one in a random location on the grid.
     public void makeBug(){
         // Takes space from current bug location and returns it to empty grid sprite.
         int prevBugID = getResources().getIdentifier(("gameCell"+curBugLocation), "id", getPackageName());
@@ -190,14 +212,17 @@ public class BugStompSingleGameLoop extends AppCompatActivity {
         curBugLocation = bugNewLoc;
     }
 
-    // This method takes in the users current position on the game grid sized 30x30.
-    // It then preDetermines the spaces the player can move from this position and sets
-    // their ID values.
-    public void movePlayer(int nc, int dir){
+    // This method takes in the users current position on the grid as well as the direction the player is moving.
+    // For example, by adding the current position to the direction where dir = -1 the character moves left.
+    // 1 moves right, -30 moves up, and 30 moves down on the 30x30 grid.
+    // The top leftmost cell is 1 and the bottom rightmost cell is 900.
+    // To set the new space directly use the movePlayer(int directToCell) method.
+    public void movePlayer(int cc, int dir){
 
-        int newCell = nc + dir;
+        int newCell = cc + dir;
 
         checkForSquish();
+
         if (move) {
             if (newCell == curPlayerLocation || newCell < 1 || newCell > 900) {
                 // Grid bounds reached or player has not moved.
@@ -208,6 +233,44 @@ public class BugStompSingleGameLoop extends AppCompatActivity {
                 curPlayerLocation = newCell;
 
                 // All the cells are named gameCell[] with [] being a number between 1 and 900.
+                String prevCellName = "gameCell" + prevPlayerLocation;
+                String curCellName = "gameCell" + curPlayerLocation;
+
+                // Get the ID of the game cells in play.
+                int prevCellID = getResources().getIdentifier(prevCellName, "id", getPackageName());
+                int curCellID = getResources().getIdentifier(curCellName, "id", getPackageName());
+
+                // Sets the current space object and prev space object so the sprites can be updated.
+                prevCell = (ImageView) findViewById(prevCellID);
+                currentCell = (ImageView) findViewById(curCellID);
+
+                // reverts the previous cell to the grid base sprite
+                prevCell.setImageResource(android.R.color.transparent);
+
+                // Turns the cell at the users position into the chosen player sprite.
+                currentCell.setImageResource(playerSprite);
+            }
+        }else{
+            // No buttons are being pressed
+        }
+    }
+
+    // This method moves the player to a cell between 1 and 900 on a 30x30 grid.
+    // The top leftmost cell is 1 and the bottom rightmost cell is 900.
+    public void movePlayer(int directToCell){
+
+        checkForSquish();
+
+        if (move) {
+            if (directToCell == curPlayerLocation || directToCell < 1 || directToCell > 900) {
+                // Grid bounds reached or player has not moved.
+            } else {
+                // The integer represents a game grid cell from 1 to 900 on a 30x30 grid.
+                // The current sell is now the previous cell and the new cell is the new value.
+                prevPlayerLocation = curPlayerLocation;
+                curPlayerLocation = directToCell;
+
+                // All the cells are named gameCell_ with _ being a number between 1 and 900.
                 String prevCellName = "gameCell" + prevPlayerLocation;
                 String curCellName = "gameCell" + curPlayerLocation;
 

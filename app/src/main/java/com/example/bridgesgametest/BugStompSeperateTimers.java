@@ -20,8 +20,8 @@ public class BugStompSeperateTimers extends AppCompatActivity {
     private ImageView arrowDown;
     private ImageView arrowLeft;
     private ImageView arrowRight;
-    private ImageView xButton;
-    private ImageView yButton;
+    private ImageView xButton; // not currently implemented
+    private ImageView yButton; // not currently implemented
 
     // TableLayout object that holds the grid cells.
     private TableLayout base;
@@ -102,6 +102,9 @@ public class BugStompSeperateTimers extends AppCompatActivity {
         }, bugSpeed);
     }
 
+
+    // Sets game default values for speed, and look of the game so that we can test functionality of new
+    // methods without having to worry about game appearance.
     public void useDefaultGameValues(){
 
         setPlayerSprite("pixel_guy");
@@ -115,7 +118,6 @@ public class BugStompSeperateTimers extends AppCompatActivity {
         setBugSpeed(5000);
         setPlayerSpeed(200);
         setPlayerStartPosition(30);
-        setBugStartPosition(2);
         setBugStartPosition(2);
     }
 
@@ -167,25 +169,35 @@ public class BugStompSeperateTimers extends AppCompatActivity {
         bugSpeed = bSpeed;
     }
 
-    // Set player starting position.
+    // Sets the initial position of the bug sprite on the grid.
     public void setPlayerStartPosition(int sp){
-        curPlayerLocation = sp;
-        prevPlayerLocation = sp;
-        // Gets ImageVew at int sp position.
-        int curCellID = getResources().getIdentifier(("gameCell"+sp), "id", getPackageName());
-        currentCell = (ImageView) findViewById(curCellID);
-        // Turns the cell at the users position into the chosen player sprite.
-        currentCell.setImageResource(playerSprite);
-        // Set Activities current position value.
+        if(sp > 0 && sp < 901) {
+            curPlayerLocation = sp;
+            prevPlayerLocation = sp;
+            // Gets ImageVew at int sp position.
+            int curCellID = getResources().getIdentifier(("gameCell" + sp), "id", getPackageName());
+            currentCell = (ImageView) findViewById(curCellID);
+            // Turns the cell at the users position into the chosen player sprite.
+            currentCell.setImageResource(playerSprite);
+            // Set Activities current position value.
+        }else{
+            setPlayerStartPosition(30);
+        }
     }
 
+    // Set bug starting position
     public void setBugStartPosition(int bsp){
-        curBugLocation = bsp;
-        int curCellID = getResources().getIdentifier(("gameCell"+bsp), "id", getPackageName());
-        bugCell = (ImageView) findViewById(curCellID);
-        bugCell.setImageResource(bugSprite);
+        if(bsp > 0 && bsp < 901) {
+            curBugLocation = bsp;
+            int curCellID = getResources().getIdentifier(("gameCell" + bsp), "id", getPackageName());
+            bugCell = (ImageView) findViewById(curCellID);
+            bugCell.setImageResource(bugSprite);
+        }else{
+            setBugStartPosition(2);
+        }
     }
 
+    // Removes old bug sprite and places a new one in a random location on the grid.
     public void makeBug(){
         // Takes space from current bug location and returns it to empty grid sprite.
         int prevBugID = getResources().getIdentifier(("gameCell"+curBugLocation), "id", getPackageName());
@@ -205,9 +217,11 @@ public class BugStompSeperateTimers extends AppCompatActivity {
         curBugLocation = bugNewLoc;
     }
 
-    // This method takes in the users current position on the game grid sized 30x30.
-    // It then preDetermines the spaces the player can move from this position and sets
-    // their ID values.
+    // This method takes in the users current position on the grid as well as the direction the player is moving.
+    // For example, by adding the current position to the direction where dir = -1 the character moves left.
+    // 1 moves right, -30 moves up, and 30 moves down on the 30x30 grid.
+    // The top leftmost cell is 1 and the bottom rightmost cell is 900.
+    // To set the new space directly use the movePlayer(int directToCell) method.
     public void movePlayer(int nc, int dir){
 
         int newCell = nc + dir;
@@ -218,7 +232,7 @@ public class BugStompSeperateTimers extends AppCompatActivity {
             // Grid bounds reached or player has not moved.
         } else {
             // The integer represents a game grid cell from 1 to 900 on a 30x30 grid.
-            // The current sell is now the previous cell and the new cell is the newNum value.
+            // The current sell is now the previous cell and the new cell is the new value.
             prevPlayerLocation = curPlayerLocation;
             curPlayerLocation = newCell;
 
@@ -239,6 +253,43 @@ public class BugStompSeperateTimers extends AppCompatActivity {
 
             // Turns the cell at the users position into the chosen player sprite.
             currentCell.setImageResource(playerSprite);
+        }
+    }
+
+    // This method moves the player to a cell between 1 and 900 on a 30x30 grid.
+    // The top leftmost cell is 1 and the bottom rightmost cell is 900.
+    public void movePlayer(int directToCell){
+
+        checkForSquish();
+        if (move) {
+            if (directToCell == curPlayerLocation || directToCell < 1 || directToCell > 900) {
+                // Grid bounds reached or player has not moved.
+            } else {
+                // The integer represents a game grid cell from 1 to 900 on a 30x30 grid.
+                // The current sell is now the previous cell and the new cell is the new value.
+                prevPlayerLocation = curPlayerLocation;
+                curPlayerLocation = directToCell;
+
+                // All the cells are named gameCell_ with _ being a number between 1 and 900.
+                String prevCellName = "gameCell" + prevPlayerLocation;
+                String curCellName = "gameCell" + curPlayerLocation;
+
+                // Get the ID of the game cells in play.
+                int prevCellID = getResources().getIdentifier(prevCellName, "id", getPackageName());
+                int curCellID = getResources().getIdentifier(curCellName, "id", getPackageName());
+
+                // Sets the current space object and prev space object so the sprites can be updated.
+                prevCell = (ImageView) findViewById(prevCellID);
+                currentCell = (ImageView) findViewById(curCellID);
+
+                // reverts the previous cell to the grid base sprite
+                prevCell.setImageResource(android.R.color.transparent);
+
+                // Turns the cell at the users position into the chosen player sprite.
+                currentCell.setImageResource(playerSprite);
+            }
+        }else{
+            // No buttons are being pressed
         }
     }
 
