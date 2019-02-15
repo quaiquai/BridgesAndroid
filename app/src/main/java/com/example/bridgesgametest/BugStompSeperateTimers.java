@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import java.util.Random;
 
-public class MainActivity extends AppCompatActivity {
+public class BugStompSeperateTimers extends AppCompatActivity {
 
     // Image view objects to give buttons onclick listeners
     private ImageView arrowUp;
@@ -65,7 +65,6 @@ public class MainActivity extends AppCompatActivity {
     // Score counter
     public int score;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,11 +74,35 @@ public class MainActivity extends AppCompatActivity {
         setButtonObjectListeners();
         useDefaultGameValues();
 
+        // Starts game from this activity
         movePlayerTimer();
         makeBugTimer();
     }
 
-    private void useDefaultGameValues(){
+    // Character moves in the direction clicked at the speed set by the player.
+    // These speeds can be used to signify difficulty levels for the game.
+    protected void movePlayerTimer(){
+        h.postDelayed(new Runnable(){
+            public void run(){
+                if (move) {
+                    movePlayer(curPlayerLocation, direction);
+                }
+                h.postDelayed(this, playerSpeed);
+            }
+        }, playerSpeed);
+    }
+
+    public void makeBugTimer(){
+        // Sets a delay in bug movement which time can be set by the student to adjust difficulty.
+        h.postDelayed(new Runnable(){
+            public void run(){
+                makeBug();
+                h.postDelayed(this, bugSpeed);
+            }
+        }, bugSpeed);
+    }
+
+    public void useDefaultGameValues(){
 
         setPlayerSprite("pixel_guy");
         setBugSprite("bug");
@@ -97,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // A method to alter the game variables all at once.
-    private void setAllGamePreferences(String pSprite, String bSprite, int gColor, int bSpeed, int pSpeed, int pStartLocation, int bStartPosition){
+    public void setAllGamePreferences(String pSprite, String bSprite, int gColor, int bSpeed, int pSpeed, int pStartLocation, int bStartPosition){
 
         direction = 0;
         score = 0;
@@ -115,37 +138,37 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // Set background color with Color.ColorName value.
-    private void setBackgroundColor(int c){
+    public void setBackgroundColor(int c){
         base.setBackgroundColor(c);
     }
 
     // Set background color with argb value
-    private void setBackgroundColor(int a, int r, int g, int b){
+    public void setBackgroundColor(int a, int r, int g, int b){
         base.setBackgroundColor(Color.argb(a,r,g,b));
     }
 
     // setPlayerSprite from drawable resources where pSprite is the name of the image without the file extension.
-    private void setPlayerSprite(String pSprite){
+    public void setPlayerSprite(String pSprite){
         playerSprite = getResources().getIdentifier(pSprite, "drawable", getPackageName());
     }
 
     // Sets the sprite for the bug using drawable resource. String is name of image without file extension.
-    private void setBugSprite(String bSprite){
+    public void setBugSprite(String bSprite){
         bugSprite = getResources().getIdentifier(bSprite, "drawable", getPackageName());
     }
 
     // Sets speed of player motion, the higher the number the slower the player moves.
-    private void setPlayerSpeed(int pSpeed){
+    public void setPlayerSpeed(int pSpeed){
         playerSpeed = pSpeed;
     }
 
     // Sets speed of bug motion, the higher the number the slower the bug refreshes.
-    private void setBugSpeed(int bSpeed){
+    public void setBugSpeed(int bSpeed){
         bugSpeed = bSpeed;
     }
 
     // Set player starting position.
-    private void setPlayerStartPosition(int sp){
+    public void setPlayerStartPosition(int sp){
         curPlayerLocation = sp;
         prevPlayerLocation = sp;
         // Gets ImageVew at int sp position.
@@ -156,24 +179,14 @@ public class MainActivity extends AppCompatActivity {
         // Set Activities current position value.
     }
 
-    private void setBugStartPosition(int bsp){
+    public void setBugStartPosition(int bsp){
         curBugLocation = bsp;
         int curCellID = getResources().getIdentifier(("gameCell"+bsp), "id", getPackageName());
         bugCell = (ImageView) findViewById(curCellID);
         bugCell.setImageResource(bugSprite);
     }
 
-    private void makeBugTimer(){
-        // Sets a delay in bug movement which time can be set by the student to adjust difficulty.
-        h.postDelayed(new Runnable(){
-            public void run(){
-                makeBug();
-                h.postDelayed(this, bugSpeed);
-            }
-        }, bugSpeed);
-    }
-
-    private void makeBug(){
+    public void makeBug(){
         // Takes space from current bug location and returns it to empty grid sprite.
         int prevBugID = getResources().getIdentifier(("gameCell"+curBugLocation), "id", getPackageName());
         ImageView prevBugSpace = (ImageView) findViewById(prevBugID);
@@ -192,27 +205,14 @@ public class MainActivity extends AppCompatActivity {
         curBugLocation = bugNewLoc;
     }
 
-    // Character moves in the direction clicked at the speed set by the player.
-    // These speeds can be used to signify difficulty levels for the game.
-    protected void movePlayerTimer(){
-        h.postDelayed(new Runnable(){
-            public void run(){
-                if (move) {
-                    movePlayer(curPlayerLocation, direction);
-                }
-                h.postDelayed(this, playerSpeed);
-            }
-        }, playerSpeed);
-    }
-
     // This method takes in the users current position on the game grid sized 30x30.
     // It then preDetermines the spaces the player can move from this position and sets
     // their ID values.
-    private void movePlayer(int nc, int dir){
+    public void movePlayer(int nc, int dir){
 
         int newCell = nc + dir;
 
-        checkForSquish();
+        //checkForSquish();
 
         if (newCell == curPlayerLocation || newCell < 1 || newCell > 900){
             // Grid bounds reached or player has not moved.
@@ -243,7 +243,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // checks to see if player and bug are in the same cell. If true, increment score and update score TextView.
-    private void checkForSquish(){
+    public void checkForSquish(){
         if (curBugLocation == curPlayerLocation){
             score++;
             String scoreString = ""+score;
@@ -255,7 +255,29 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void setButtonObjectListeners(){
+    public int getBugSpeed(){
+        return bugSpeed;
+    }
+    public int getPlayerSpeed(){
+        return playerSpeed;
+    }
+    public int getScore(){
+        return score;
+    }
+    public int getDirection(){
+        return direction;
+    }
+    public int getBugPosition(){
+        return curBugLocation;
+    }
+    public int getPrevPlayerPosition(){
+        return prevPlayerLocation;
+    }
+    public int getPlayerPosition(){
+        return curPlayerLocation;
+    }
+
+    public void setButtonObjectListeners(){
 
         arrowUp = (ImageView) findViewById(R.id.btnUp);
         arrowDown = (ImageView) findViewById(R.id.btnDown);
