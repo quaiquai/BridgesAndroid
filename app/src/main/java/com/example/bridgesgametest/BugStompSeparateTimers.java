@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import java.util.Random;
 
-public class BugStompSeperateTimers extends AppCompatActivity {
+public class BugStompSeparateTimers extends AppCompatActivity {
 
     // Image view objects to give buttons onclick listeners
     private ImageView arrowUp;
