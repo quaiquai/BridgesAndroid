@@ -1,5 +1,4 @@
 package com.example.bridgesgametest;
-
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -13,7 +12,7 @@ import android.widget.TextView;
 
 import java.util.Random;
 
-public class BugStompSingleGameLoop extends AppCompatActivity {
+public class Snake extends AppCompatActivity {
 
     // Image view objects to give buttons onclick listeners
     private ImageView arrowUp;
@@ -115,7 +114,7 @@ public class BugStompSingleGameLoop extends AppCompatActivity {
         score = 0;
         move = false;
         base = (TableLayout) findViewById(R.id.gridBase);
-        setBackgroundColor(Color.RED);
+        setBackgroundColor(Color.GRAY);
         setFPS(100);
         setPlayerStartPosition(30);
         setBugStartPosition(2);
@@ -244,8 +243,7 @@ public class BugStompSingleGameLoop extends AppCompatActivity {
                 prevCell = (ImageView) findViewById(prevCellID);
                 currentCell = (ImageView) findViewById(curCellID);
 
-                // reverts the previous cell to the grid base sprite
-                prevCell.setImageResource(android.R.color.transparent);
+                //checkForSnake();
 
                 // Turns the cell at the users position into the chosen player sprite.
                 currentCell.setImageResource(playerSprite);
@@ -290,6 +288,12 @@ public class BugStompSingleGameLoop extends AppCompatActivity {
             }
         }else{
             // No buttons are being pressed
+        }
+    }
+
+    private void checkForSnake(){
+        if (currentCell.getTag() == prevCell.getTag()){
+            this.recreate();
         }
     }
 
