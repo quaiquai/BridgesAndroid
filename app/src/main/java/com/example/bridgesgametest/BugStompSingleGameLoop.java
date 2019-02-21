@@ -10,10 +10,11 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TableLayout;
 import android.widget.TextView;
-
 import java.util.Random;
 
 public class BugStompSingleGameLoop extends AppCompatActivity {
+/**
+    private GameGrid grid;
 
     // Image view objects to give buttons onclick listeners
     private ImageView arrowUp;
@@ -115,7 +116,8 @@ public class BugStompSingleGameLoop extends AppCompatActivity {
         score = 0;
         move = false;
         base = (TableLayout) findViewById(R.id.gridBase);
-        setBackgroundColor(Color.RED);
+
+        grid.setCellColor(5, Color.GREEN);
         setFPS(100);
         setPlayerStartPosition(30);
         setBugStartPosition(2);
@@ -427,4 +429,5 @@ public class BugStompSingleGameLoop extends AppCompatActivity {
             }
         });
     }
+    **/
 }

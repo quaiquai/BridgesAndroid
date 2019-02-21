@@ -6,7 +6,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 
-public class BridgesAPITranslator extends AppCompatActivity {
+public class BridgesActivity extends AppCompatActivity {
 
     // Image view objects to give buttons onclick listeners
     private ImageView arrowUp;
@@ -15,11 +15,6 @@ public class BridgesAPITranslator extends AppCompatActivity {
     private ImageView arrowRight;
     private ImageView xButton;// not yet implemented
     private ImageView yButton;// not yet implemented
-    ImageView[][] gameCells = new ImageView[30][30];
-
-    private enum GameGrid {
-
-        }
 
     public void setButtonObjectListeners(){
 
@@ -74,5 +69,4 @@ public class BridgesAPITranslator extends AppCompatActivity {
             }
         });
     }
-}
 }

@@ -1,34 +1,22 @@
 package com.example.bridgesgametest;
 
-import babybridges.game.BlockingGame;
-import babybridges.game.NGCKGame;
-import bridges.connect.Bridges;
-import bridges.base.GameGrid;
-import bridges.base.NamedColor;
-import bridges.base.NamedSymbol;
+import android.graphics.Color;
 
-public class BridgesStudentGameBugStomp extends BridgesAPI {
+public class BridgesStudentGameBugStomp extends NGCKGame {
 
     int[] loc = {0,0}; // row, col
     int[] boardSize = grid.getDimensions();
     int[] bug;
     int bugttl = 100;
     int score = 0;
-    NamedColor bugColor;
+    int bugColor;
 
     static java.util.Random randomizer;
-
-    public BUGSTOMP(int assid, String login, String apiKey) {
-        super(assid, login, apiKey);
-
-        randomizer = new java.util.Random();
-        bugColor = randomEnum(NamedColor.class);
-    }
 
     public void initialize() {
         for(int i = 0; i < grid.getDimensions()[0]; i++) { // each row
             for(int j = 0; j < grid.getDimensions()[1]; j++) { // each column
-                grid.setBGColor(i, j, NamedColor.white);
+                grid.setBGColor(i, j, Color.WHITE);
             }
         }
 
@@ -59,14 +47,14 @@ public class BridgesStudentGameBugStomp extends BridgesAPI {
         if(bugttl < 1) {
             bug = new int[]{randomizer.nextInt(29)+1, randomizer.nextInt(29)+1};
             bugttl = randomizer.nextInt(100-50)+50;
-            bugColor = randomEnum(NamedColor.class);
+            bugColor = randomizer.nextInt(Color.WHITE);
             score--;
             if(score < 0) score = 0;
         } else {
             bugttl--;
             if(overlap(bug, loc)) {
                 bug = new int[]{randomizer.nextInt(29)+1, randomizer.nextInt(29)+1};
-                bugColor = randomEnum(NamedColor.class);
+                bugColor = randomizer.nextInt(Color.WHITE);
                 score++;
             }
         }
@@ -80,7 +68,7 @@ public class BridgesStudentGameBugStomp extends BridgesAPI {
         // paint black
         for (int i = 0; i < 30; ++i) {
             for (int j = 0; j < 30; ++j) {
-                SetBGColor(i, j, NamedColor.black);
+                SetBGColor(i, j, Color.BLACK);
                 SetSymbol(i, j, 0);
             }
         }
@@ -97,7 +85,7 @@ public class BridgesStudentGameBugStomp extends BridgesAPI {
         grid.drawObject(bug[0], bug[1], NamedSymbol.bug3, bugColor);
 
         // paint current location
-        grid.drawObject(loc[0], loc[1], NamedSymbol.man, NamedColor.white);
+        grid.drawObject(loc[0], loc[1], NamedSymbol.man, Color.WHITE);
     }
 
     public void win() {
@@ -136,13 +124,14 @@ public class BridgesStudentGameBugStomp extends BridgesAPI {
 
     public static void main(String args[]) {
 
-        // Initialize our nonblocking game
-        BUGSTOMP mg = new BUGSTOMP(12, "username", "apikey");
-        mg.setTitle("BUG STOMP");
-        mg.setDescription("Use the arrow keys to move the person over the bugs - don't let them escape!");
+/**
+ // Initialize our nonblocking game
+ BUGSTOMP mg = new BUGSTOMP(12, "username", "apikey");
+ mg.setTitle("BUG STOMP");
+ mg.setDescription("Use the arrow keys to move the person over the bugs - don't let them escape!");
 
-        // start running the game
-        mg.start();
+ // start running the game
+ mg.start();
+ **/
     }
-
 }
