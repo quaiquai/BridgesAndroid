@@ -9,7 +9,6 @@ public class BufferedStart extends AppCompatActivity {
     ControllerDpad cdpad;
     GameGrid gg;
     NGCKGame_AndroidVersion ngck;
-    BridgesStudentGameBugStomp bsg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,9 +22,5 @@ public class BufferedStart extends AppCompatActivity {
         cdpad= (ControllerDpad) getSupportFragmentManager().findFragmentById(R.id.Dpad);
 
         ngck.init(gg, cdpad);
-
-        bsg = new BridgesStudentGameBugStomp();
-
-        //bsg = new BridgesStudentGameBugStomp();
     }
 }

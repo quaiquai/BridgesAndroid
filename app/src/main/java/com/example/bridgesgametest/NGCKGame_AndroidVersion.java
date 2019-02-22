@@ -10,8 +10,6 @@ import android.view.ViewGroup;
 public abstract class NGCKGame_AndroidVersion {
 
     // / the game map.
-    private int rows = 30;
-    private int cols = 30;
     protected GameGrid grid;
 
     // /helper class to make Input Management a bit easier.
@@ -20,11 +18,12 @@ public abstract class NGCKGame_AndroidVersion {
     // Handler for loop management.
     private Handler h = new Handler();
     // Sets the delay for the GameLoop.
-    private int frameDelay = 100;
+    private int frameDelay;
 
     protected void init(GameGrid gg, ControllerDpad cdp){
         grid = gg;
         dp = cdp;
+        frameDelay = 100;
     }
 
     // / @return true if "left" is pressed
