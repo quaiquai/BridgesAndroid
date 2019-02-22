@@ -67,9 +67,19 @@ public class GameGrid extends Fragment {
         return dimensions;
     }
 
-    public void setBGColor(int x, int y, int c){
+    public void setBGColor(int x, int y, int colorHex){
 
     }
 
+    public void setBGColor(int x, int y, int r, int g, int b){
 
+    }
+
+    public void setFGColor(int x, int y, int colorHex){
+
+    }
+
+    public void setFGColor(int x, int y, int r, int g, int b){
+
+    }
 }

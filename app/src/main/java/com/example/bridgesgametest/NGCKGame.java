@@ -67,8 +67,8 @@ public abstract class NGCKGame extends BridgesActivity {
 
     // /takes bridges credential and information as a parameter.
     public NGCKGame(int assid, String login, String apiKey) {
-        timeoflastframe = System.currentTimeMillis();
 /**
+        timeoflastframe = System.currentTimeMillis();
         // create a new color grid with random color
         grid = new GameGrid(rows, cols, 6);
 

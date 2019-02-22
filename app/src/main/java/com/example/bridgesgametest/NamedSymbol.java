@@ -8,7 +8,6 @@ public enum NamedSymbol {
 
     NamedSymbol(String str){
         this.bitName = str;
-        getBitName();
     }
 
     public String getBitName(){

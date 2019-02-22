@@ -13,7 +13,7 @@ import android.widget.TextView;
 import java.util.Random;
 
 public class BugStompSingleGameLoop extends AppCompatActivity {
-/**
+
     private GameGrid grid;
 
     // Image view objects to give buttons onclick listeners
@@ -429,5 +429,4 @@ public class BugStompSingleGameLoop extends AppCompatActivity {
             }
         });
     }
-    **/
 }
