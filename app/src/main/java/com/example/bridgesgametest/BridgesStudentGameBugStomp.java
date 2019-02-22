@@ -2,8 +2,8 @@ package com.example.bridgesgametest;
 
 import android.graphics.Color;
 
-public class BridgesStudentGameBugStomp extends NGCKGame {
-/**
+public class BridgesStudentGameBugStomp extends NGCKGame_AndroidVersion{
+
     int[] loc = {0,0}; // row, col
     int[] boardSize = grid.getDimensions();
     int[] bug;
@@ -69,7 +69,7 @@ public class BridgesStudentGameBugStomp extends NGCKGame {
         for (int i = 0; i < 30; ++i) {
             for (int j = 0; j < 30; ++j) {
                 SetBGColor(i, j, Color.BLACK);
-                SetSymbol(i, j, 0);
+                SetSymbol(i, j, "bug");
             }
         }
 
@@ -82,36 +82,36 @@ public class BridgesStudentGameBugStomp extends NGCKGame {
 
 
         // paint bug
-        grid.drawObject(bug[0], bug[1], NamedSymbol.bug3, bugColor);
+        grid.drawObject(bug[0], bug[1], "bug", bugColor);
 
         // paint current location
-        grid.drawObject(loc[0], loc[1], NamedSymbol.man, Color.WHITE);
+        grid.drawObject(loc[0], loc[1], "bug", Color.WHITE);
     }
 
     public void win() {
         // paint winner!
-        grid.drawObject(0,0, NamedSymbol.man);
-        grid.drawObject(0,1, NamedSymbol.W);
-        grid.drawObject(0,2, NamedSymbol.i);
-        grid.drawObject(0,3, NamedSymbol.n);
-        grid.drawObject(0,4, NamedSymbol.n);
-        grid.drawObject(0,5, NamedSymbol.e);
-        grid.drawObject(0,6, NamedSymbol.r);
-        grid.drawObject(0,7, NamedSymbol.man);
+        grid.drawObject(0,0, "pixel_guy");
+        grid.drawObject(0,1, "w");
+        grid.drawObject(0,2, "i");
+        grid.drawObject(0,3, "n");
+        grid.drawObject(0,4, "n");
+        grid.drawObject(0,5, "e");
+        grid.drawObject(0,6, "r");
+        grid.drawObject(0,7, "pixel_guy");
     }
 
     public void paintScore(int score) {
         // paint score
-        grid.drawObject(0,0, NamedSymbol.S);
-        grid.drawObject(0,1, NamedSymbol.c);
-        grid.drawObject(0,2, NamedSymbol.o);
-        grid.drawObject(0,3, NamedSymbol.r);
-        grid.drawObject(0,4, NamedSymbol.e);
-        grid.drawObject(0,6, NamedSymbol.values()[score + 53]);
+        grid.drawObject(0,0, "s");
+        grid.drawObject(0,1, "c");
+        grid.drawObject(0,2, "o");
+        grid.drawObject(0,3, "r");
+        grid.drawObject(0,4, "e");
     }
 
     public void GameLoop() {
         if(score >= 10) System.exit(0);
+        initialize();
         handlebug();
         handleInput();
         paintScreen();
@@ -122,15 +122,11 @@ public class BridgesStudentGameBugStomp extends NGCKGame {
         return clazz.getEnumConstants()[x];
     }
 
-    public static void main(String args[]) {
-
+    public void main() {
      // Initialize our nonblocking game
-     BUGSTOMP mg = new BUGSTOMP(12, "username", "apikey");
-     mg.setTitle("BUG STOMP");
-     mg.setDescription("Use the arrow keys to move the person over the bugs - don't let them escape!");
+     //BridgesStudentGameBugStomp mg = new BridgesStudentGameBugStomp();
 
      // start running the game
-     mg.start();
+     //mg.start();
     }
- **/
 }

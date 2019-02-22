@@ -6,36 +6,11 @@
     android:layout_height="match_parent"
     tools:context=".BugStompSeparateTimers">
 
-    <LinearLayout
+    <fragment
+        android:name="com.example.bridgesgametest.NGCKGame_AndroidVersion"
+        android:id="@+id/GameView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal"
-        tools:layout_editor_absoluteX="86dp"
-        tools:layout_editor_absoluteY="0dp">
+        android:layout_height="match_parent">
+    </fragment>
 
-        <fragment
-            android:name="com.example.bridgesgametest.ControllerDpad"
-            android:id="@+id/Dpad"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
-        </fragment>
-
-        <fragment
-            android:name="com.example.bridgesgametest.GameGrid"
-            android:id="@+id/GridFragment"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="4">
-        </fragment>
-
-        <fragment
-            android:name="com.example.bridgesgametest.ControllerXY"
-            android:id="@+id/XY"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
-        </fragment>
-
-    </LinearLayout>
 </android.support.constraint.ConstraintLayout>

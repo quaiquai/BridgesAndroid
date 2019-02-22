@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <fragment
+            android:name="com.example.bridgesgametest.ControllerDpad"
+            android:id="@+id/Dpad"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+        </fragment>
+
+        <fragment
+            android:name="com.example.bridgesgametest.GameGrid"
+            android:id="@+id/GridFragment"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="4">
+        </fragment>
+
+        <fragment
+            android:name="com.example.bridgesgametest.ControllerXY"
+            android:id="@+id/XY"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+        </fragment>
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

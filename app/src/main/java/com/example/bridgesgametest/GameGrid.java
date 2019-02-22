@@ -1,5 +1,6 @@
 package com.example.bridgesgametest;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -42,44 +43,48 @@ public class GameGrid extends Fragment {
         }
     }
 
-    public void GameGrid(int i, int x, int c){
-
+    // Draw object at specified grid location. Color neutral.
+    public void drawObject(int x, int y, String spriteName){
+        int sprite = getResources().getIdentifier(spriteName, "drawable", getActivity().getPackageName());
+        GameGrid[(x*y)].setImageResource(sprite);
     }
 
-    public void drawObject(int x, int y, String s){
-
+    // Draw object at specified grid location. Color hexValue.
+    public void drawObject(int x, int y, String spriteName, int color){
+        int sprite = getResources().getIdentifier(spriteName, "drawable", getActivity().getPackageName());
+        GameGrid[(x*y)].setImageResource(sprite);
+        setFGColor(x, y, color);
     }
 
-    public void drawObject(int x, int y, String s, int c){
-
+    // Draw object at specified grid location. Color rgbValue.
+    public void drawObject(int x, int y, String spriteName, int red, int blue, int green){
+        int sprite = getResources().getIdentifier(spriteName, "drawable", getActivity().getPackageName());
+        GameGrid[(x*y)].setImageResource(sprite);
+        setFGColor(x, y, red, blue, green);
     }
 
-    public void drawObject(int x, int y, NamedSymbol ns){
-
-    }
-
-    // Change the color of a cell using an android hex value "Color.colorName"
-    public void setCellColor(int location, int color){
-        GameGrid[location].setBackgroundColor(color);
-    }
-
+    // Return grid dimensions to user.
     public int[] getDimensions(){
         return dimensions;
     }
 
+    // Set background color of a grid cell using androidAPI value.
     public void setBGColor(int x, int y, int colorHex){
-
+        GameGrid[(x*y)].setBackgroundColor(colorHex);
     }
 
+    // Set background colors of a grid cell using rgb values.
     public void setBGColor(int x, int y, int r, int g, int b){
-
+        GameGrid[(x*y)].setBackgroundColor(Color.rgb(r, g, b));
     }
 
+    // Set foreground color of a grid cell using androidAPI value.
     public void setFGColor(int x, int y, int colorHex){
-
+        GameGrid[(x*y)].setColorFilter(colorHex);
     }
 
+    // Set foreground color of a grid cell using rgb values.
     public void setFGColor(int x, int y, int r, int g, int b){
-
+        GameGrid[(x*y)].setColorFilter(Color.rgb(r, g, b));
     }
 }

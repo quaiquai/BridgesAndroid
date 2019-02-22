@@ -1,17 +1,25 @@
 package com.example.bridgesgametest;
 
 import android.graphics.Color;
+import android.support.v7.app.AppCompatActivity;
 
-public abstract class NGCKGame extends BridgesActivity {
+public abstract class NGCKGame extends AppCompatActivity {
 /**
     // / the game map.
     private int rows = 30;
     private int cols = 30;
     protected GameGrid grid;
 
+    // /Bridges interaction
+    private Bridges bridges;
+    private SocketConnection sock;
+
+    // / this stores the JSON representation that will be sent to the BRIDGES
+    // server.
+    private String gridJSON;
+
     // /helper class to make Input Management a bit easier.
     private InputHelper ih;
-    private ControllerDpad dp;
 
     // /used for fps control
     private long timeoflastframe;
@@ -66,12 +74,22 @@ public abstract class NGCKGame extends BridgesActivity {
         return ih.d();
     }
 
+
+
+
     // /takes bridges credential and information as a parameter.
     public NGCKGame(int assid, String login, String apiKey) {
-
         timeoflastframe = System.currentTimeMillis();
+
+        // bridges-sockets account (you need to make a new account:
+        // https://bridges-sockets.herokuapp.com/signup)
+        bridges = new Bridges(assid, login, apiKey);
+
+        // make sure the bridges connects to the game version of the web app
+        bridges.setServer("games");
+
         // create a new color grid with random color
-        grid = new GameGrid(rows, cols, 6);
+        grid = new GameGrid(rows, cols);
 
         // set up socket connection to receive and send data
         sock = new SocketConnection();
@@ -81,40 +99,40 @@ public abstract class NGCKGame extends BridgesActivity {
     }
 
     protected void setTitle(String title) {
-        //bridges.setTitle(title);
+        bridges.setTitle(title);
     }
 
     protected void setDescription(String desc) {
-        //bridges.setDescription(desc);
+        bridges.setDescription(desc);
     }
 
     // /set background color of cell x, y to c
     // /
-    protected void SetBGColor(int x, int y, int c) {
+    protected void SetBGColor(int x, int y, NamedColor c) {
         grid.setBGColor(y, x, c);
     }
 
     // /set foreground color of cell x, y to c
     // /
-    protected void SetFGColor(int x, int y, int c) {
+    protected void SetFGColor(int x, int y, NamedColor c) {
         grid.setFGColor(y, x, c);
     }
 
     // /set symbol of cell x, y to s
     // /
-    protected void SetSymbol(int x, int y, String s) {
+    protected void SetSymbol(int x, int y, int s) {
         grid.drawObject(y, x, s);
     }
 
     // /set symbol of cell x, y to s
     // /
-    protected void DrawObject(int x, int y, String s) {
+    protected void DrawObject(int x, int y, NamedSymbol s) {
         grid.drawObject(y, x, s);
     }
 
     // /set symbol and foreground color of cell x, y to s and c
     // /
-    protected void DrawObject(int x, int y, String s, int c) {
+    protected void DrawObject(int x, int y, NamedSymbol s, NamedColor c) {
         grid.drawObject(y, x, s, c);
     }
 
@@ -170,6 +188,16 @@ public abstract class NGCKGame extends BridgesActivity {
             Thread.sleep(5 * 1000); // wait for browser to connect
         } catch (InterruptedException ie) {
             // die?
+        }
+
+        // associate the grid with the Bridges object
+        bridges.setDataStructure(grid);
+
+        // visualize the grid
+        try {
+            bridges.visualize();
+        } catch (Exception err) {
+            System.out.println(err);
         }
 
         initialize();

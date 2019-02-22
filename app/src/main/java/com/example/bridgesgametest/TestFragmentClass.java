@@ -43,27 +43,27 @@ public class TestFragmentClass extends AppCompatActivity {
 
     public void testButtons(){
         if (dp.left()){
-            gm.setCellColor(100, Color.RED);
+            gm.setBGColor(5, 5, Color.RED);
         }else{
-            gm.setCellColor(100, Color.BLUE);
+            gm.setBGColor(5, 5, Color.BLUE);
         }
 
         if (dp.right()){
-            gm.setCellColor(400, Color.CYAN);
+            gm.setBGColor(5, 5, Color.CYAN);
         }else{
-            gm.setCellColor(400, Color.GRAY);
+            gm.setBGColor(5, 5, Color.GRAY);
         }
 
         if (dp.up()){
-            gm.setCellColor(500, Color.GREEN);
+            gm.setBGColor(5, 5, Color.GREEN);
         }else{
-            gm.setCellColor(500, Color.GRAY);
+            gm.setBGColor(5, 5, Color.GRAY);
         }
 
         if (dp.down()){
-            gm.setCellColor(600, Color.BLACK);
+            gm.setBGColor(5, 5, Color.BLACK);
         }else{
-            gm.setCellColor(600, Color.MAGENTA);
+            gm.setBGColor(5, 5, Color.MAGENTA);
         }
     }
 
