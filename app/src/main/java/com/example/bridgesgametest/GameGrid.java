@@ -3,6 +3,7 @@ package com.example.bridgesgametest;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -54,25 +55,23 @@ public class GameGrid extends Fragment {
 
     // Draw object at specified grid location. Color neutral.
     public void drawObject(int x, int y, NamedSymbol spriteName){
-        Bitmap sprite = setSprite(spriteName);
+        Bitmap sprite = setSprite(spriteName);//will get the subimage based on the sprite name
         //int sprite = getResources().getIdentifier(spriteName, "drawable", getActivity().getPackageName());
-        GameGrid[(x*y)].setImageBitmap(sprite);
+        GameGrid[(x*y)].setImageBitmap(sprite);//set bitmap image
     }
 
     // Draw object at specified grid location. Color hexValue.
     public void drawObject(int x, int y, NamedSymbol spriteName, int color){
-        Bitmap sprite = setSprite(spriteName);
+        Bitmap sprite = setSprite(spriteName);//will get the subimage based on the sprite name
         //int sprite = getResources().getIdentifier(spriteName, "drawable", getActivity().getPackageName());
-        GameGrid[(x*y)].setImageBitmap(sprite);
-        setFGColor(x, y, color);
+        setFGColor(x, y, color);//set bitmap color
     }
 
     // Draw object at specified grid location. Color rgbValue.
     public void drawObject(int x, int y, NamedSymbol spriteName, int red, int blue, int green){
-        Bitmap sprite = setSprite(spriteName);
+        Bitmap sprite = setSprite(spriteName);//will get the subimage based on the sprite name
         //int sprite = getResources().getIdentifier(spriteName, "drawable", getActivity().getPackageName());
-        GameGrid[(x*y)].setImageBitmap(sprite);
-        setFGColor(x, y, red, blue, green);
+        setFGColor(x, y, red, blue, green);//set the bitmaps color
     }
 
     // Return grid dimensions to user.
@@ -92,12 +91,16 @@ public class GameGrid extends Fragment {
 
     // Set foreground color of a grid cell using androidAPI value.
     public void setFGColor(int x, int y, int colorHex){
-        GameGrid[(x*y)].setColorFilter(colorHex);
+        Bitmap sprite = ((BitmapDrawable)GameGrid[(x*y)].getDrawable()).getBitmap();//gets the bitmap at certain imageview
+        sprite.eraseColor(colorHex);//sets color of pixels to input rgb
+        GameGrid[(x*y)].setImageBitmap(sprite);//sets image view to new bitmap
     }
 
     // Set foreground color of a grid cell using rgb values.
     public void setFGColor(int x, int y, int r, int g, int b){
-        GameGrid[(x*y)].setColorFilter(Color.rgb(r, g, b));
+        Bitmap sprite = ((BitmapDrawable)GameGrid[(x*y)].getDrawable()).getBitmap(); //gets the bitmap at certain imageview
+        sprite.eraseColor(Color.rgb(r,g,b));//sets color of pixels to input rgb
+        GameGrid[(x*y)].setImageBitmap(sprite);//sets image view to new bitmap
     }
 
     private Bitmap setSprite(NamedSymbol spriteName){
