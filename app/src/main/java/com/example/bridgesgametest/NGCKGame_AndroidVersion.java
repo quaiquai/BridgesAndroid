@@ -1,6 +1,5 @@
 package com.example.bridgesgametest;
 
-import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
@@ -8,7 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public abstract class NGCKGame_AndroidVersion extends Fragment {
+public abstract class NGCKGame_AndroidVersion {
 
     // / the game map.
     private int rows = 30;
@@ -21,22 +20,11 @@ public abstract class NGCKGame_AndroidVersion extends Fragment {
     // Handler for loop management.
     private Handler h = new Handler();
     // Sets the delay for the GameLoop.
-    private int frameDelay;
+    private int frameDelay = 100;
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState){
-        View v = inflater.inflate(R.layout.activity_main, parent, false);
-        getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-        // This is the activity view that shows up on the phone screen when the game starts.
-        getActivity().setContentView(R.layout.activity_main);
-
-        // Create the game grid object and connect it to the currently static corresponding fragment in the main activity.
-        grid = (GameGrid) getActivity().getSupportFragmentManager().findFragmentById(R.id.GridFragment);
-
-        // Create the dpad object and connect it to the currently static corresponding fragment in the main activity.
-        dp = (ControllerDpad) getActivity().getSupportFragmentManager().findFragmentById(R.id.Dpad);
-
-        return v;
+    protected void init(GameGrid gg, ControllerDpad cdp){
+        grid = gg;
+        dp = cdp;
     }
 
     // / @return true if "left" is pressed
@@ -96,7 +84,7 @@ public abstract class NGCKGame_AndroidVersion extends Fragment {
             public void run(){
 
                 // Code here gets looped.
-                GameLoop();
+                //GameLoop();
 
                 h.postDelayed(this, frameDelay);
             }
