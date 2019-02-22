@@ -71,20 +71,15 @@ public abstract class NGCKGame_AndroidVersion extends Fragment {
         grid.setFGColor(y, x, c);
     }
 
-    // /set symbol of cell x, y to s
-    // /
-    protected void SetSymbol(int x, int y, String s) {
-        grid.drawObject(y, x, s);
-    }
 
     // /set symbol of cell x, y to s
     // /
-    protected void DrawObject(int x, int y, String s) {
+    protected void DrawObject(int x, int y, NamedSymbol s) {
         grid.drawObject(y, x, s);
     }
 
     // set symbol and foreground color of cell x, y to s and c
-    protected void DrawObject(int x, int y, String s, int c) {
+    protected void DrawObject(int x, int y, NamedSymbol s, int c) {
         grid.drawObject(y, x, s, c);
     }
 
