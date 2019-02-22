@@ -17,12 +17,12 @@ public class GameGrid extends Fragment {
     public int gridX = 30;
     public int gridY = 30;
 
-    private Bitmap bitmapImage = BitmapFactory.decodeResource(getResources(), R.drawable.symbols);
+    private Bitmap bitmapImage;
     private Bitmap subImage;
 
     //width and height for the sprite sheet
-    private int WIDTH = bitmapImage.getWidth() / 16;
-    private int HEIGHT = bitmapImage.getHeight() / 16;
+    private int WIDTH;
+    private int HEIGHT;
 
     public int[] dimensions = {gridX, gridY};
 
@@ -35,6 +35,10 @@ public class GameGrid extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState){
         View v = inflater.inflate(R.layout.game_grid, parent, false);
+
+        bitmapImage = BitmapFactory.decodeResource(getResources(), R.drawable.symbols);
+        WIDTH = bitmapImage.getWidth() / 16;
+        HEIGHT = bitmapImage.getHeight() / 16;
 
         connectCells(v);
 
