@@ -3,7 +3,7 @@ package com.example.bridgesgametest;
 import android.graphics.Color;
 
 public abstract class NGCKGame extends BridgesActivity {
-
+/**
     // / the game map.
     private int rows = 30;
     private int cols = 30;
@@ -11,6 +11,7 @@ public abstract class NGCKGame extends BridgesActivity {
 
     // /helper class to make Input Management a bit easier.
     private InputHelper ih;
+    private ControllerDpad dp;
 
     // /used for fps control
     private long timeoflastframe;
@@ -67,7 +68,7 @@ public abstract class NGCKGame extends BridgesActivity {
 
     // /takes bridges credential and information as a parameter.
     public NGCKGame(int assid, String login, String apiKey) {
-/**
+
         timeoflastframe = System.currentTimeMillis();
         // create a new color grid with random color
         grid = new GameGrid(rows, cols, 6);
@@ -75,7 +76,7 @@ public abstract class NGCKGame extends BridgesActivity {
         // set up socket connection to receive and send data
         sock = new SocketConnection();
         sock.setupConnection(bridges.getUserName(), bridges.getAssignment());
-**/
+
         ih = new InputHelper(sock);
     }
 
@@ -124,7 +125,7 @@ public abstract class NGCKGame extends BridgesActivity {
     // / function to define by the programmer. This function is called
     // / once per frame.
     public abstract void GameLoop();
-/**
+
     // / This function prepare all that is needde to be able to render
     // / as fast as possible. Here it builds the correct representation
     // / to send to the server.
@@ -141,7 +142,7 @@ public abstract class NGCKGame extends BridgesActivity {
         // send valid JSON for grid into the socket
         sock.sendData(gridJSON);
     }
-**/
+
     // / should be called right before render() Aims at having a fixed
     // / fps of 30 frames per second. This work by waiting until
     // / 1/30th of a second after the last call to this function.
@@ -171,8 +172,6 @@ public abstract class NGCKGame extends BridgesActivity {
             // die?
         }
 
-
-/**
         initialize();
         while (true) {
             GameLoop();
@@ -182,6 +181,6 @@ public abstract class NGCKGame extends BridgesActivity {
             render();
             // System.out.println("rendered");
         }
- **/
     }
+ **/
 }

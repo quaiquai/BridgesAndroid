@@ -3,7 +3,7 @@ package com.example.bridgesgametest;
 import android.graphics.Color;
 
 public class BridgesStudentGameBugStomp extends NGCKGame {
-
+/**
     int[] loc = {0,0}; // row, col
     int[] boardSize = grid.getDimensions();
     int[] bug;
@@ -124,14 +124,13 @@ public class BridgesStudentGameBugStomp extends NGCKGame {
 
     public static void main(String args[]) {
 
-/**
- // Initialize our nonblocking game
- BUGSTOMP mg = new BUGSTOMP(12, "username", "apikey");
- mg.setTitle("BUG STOMP");
- mg.setDescription("Use the arrow keys to move the person over the bugs - don't let them escape!");
+     // Initialize our nonblocking game
+     BUGSTOMP mg = new BUGSTOMP(12, "username", "apikey");
+     mg.setTitle("BUG STOMP");
+     mg.setDescription("Use the arrow keys to move the person over the bugs - don't let them escape!");
 
- // start running the game
- mg.start();
- **/
+     // start running the game
+     mg.start();
     }
+ **/
 }
