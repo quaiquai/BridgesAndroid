@@ -13,7 +13,7 @@ public class BridgesStudentGameBugStomp extends NGCKGame_AndroidVersion{
 
     static java.util.Random randomizer;
 
-    public void initialize() {
+    public void initializeMethod() {
         for(int i = 0; i < grid.getDimensions()[0]; i++) { // each row
             for(int j = 0; j < grid.getDimensions()[1]; j++) { // each column
                 grid.setBGColor(i, j, Color.WHITE);
@@ -111,7 +111,6 @@ public class BridgesStudentGameBugStomp extends NGCKGame_AndroidVersion{
 
     public void GameLoop() {
         if(score >= 10) System.exit(0);
-        initialize();
         handlebug();
         handleInput();
         paintScreen();
@@ -122,7 +121,7 @@ public class BridgesStudentGameBugStomp extends NGCKGame_AndroidVersion{
         return clazz.getEnumConstants()[x];
     }
 
-    public void main() {
+    public void initialMethod() {
      // Initialize our nonblocking game
      //BridgesStudentGameBugStomp mg = new BridgesStudentGameBugStomp();
 

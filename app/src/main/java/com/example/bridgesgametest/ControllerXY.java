@@ -10,7 +10,7 @@ public class ControllerXY extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState){
-        View v = inflater.inflate(R.layout.control_dpad, parent, false);
+        View v = inflater.inflate(R.layout.control_xy, parent, false);
 
         connectToControls(v);
 
