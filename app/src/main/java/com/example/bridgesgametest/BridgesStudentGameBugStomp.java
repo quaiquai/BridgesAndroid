@@ -14,8 +14,8 @@ public class BridgesStudentGameBugStomp extends NGCKGame_AndroidVersion{
     static java.util.Random randomizer;
 
     public void init() {
-        for(int i = 0; i < 30; i++) { // each row
-            for(int j = 0; j < 30; j++) { // each column
+        for(int i = 0; i < grid.getDimensions()[0]; i++) { // each row
+            for(int j = 0; j < grid.getDimensions()[1]; j++) { // each column
                 grid.setBGColor(i, j, Color.WHITE);
             }
         }
@@ -54,7 +54,7 @@ public class BridgesStudentGameBugStomp extends NGCKGame_AndroidVersion{
             bugttl--;
             if(overlap(bug, loc)) {
                 bug = new int[]{randomizer.nextInt(29)+1, randomizer.nextInt(29)+1};
-                bugColor = randomizer.nextInt(Color.WHITE);
+                bugColor = randomizer.nextInt(Color.BLUE);
                 score++;
             }
         }

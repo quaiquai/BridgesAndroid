@@ -27,7 +27,7 @@ public class GameGrid extends Fragment {
     public int[] dimensions;
 
     // Array of gridCells as ImageViews from XML game_grid.
-    public ImageView[] GameGrid = new ImageView[900];
+    public ImageView[][] GameGrid = new ImageView[30][30];
 
     // A single cell ImageView object so cells can be accessed one at a time.
     public ImageView singleCell;
@@ -54,11 +54,13 @@ public class GameGrid extends Fragment {
         String cellNameBase = "gameCell";
         String cellName;
         int cellID;
-        for (int i = 0; i < 900; i++){
-            cellName = cellNameBase+(i+1);
-            cellID = getResources().getIdentifier(cellName, "id", getActivity().getPackageName());
-            GameGrid[i] = v.findViewById(cellID);
-            GameGrid[i].setBackgroundColor(Color.GREEN);
+        for (int i = 0; i < 30; i++){
+            for (int j = 0; j < 30; j++){
+                cellName = cellNameBase+(i+1);
+                cellID = getResources().getIdentifier(cellName, "id", getActivity().getPackageName());
+                GameGrid[i][j] = v.findViewById(cellID);
+                GameGrid[i][j].setBackgroundColor(Color.GREEN);
+            }
         }
     }
 
@@ -66,7 +68,7 @@ public class GameGrid extends Fragment {
     public void drawObject(int x, int y, NamedSymbol spriteName){
         Bitmap sprite = setSprite(spriteName);//will get the subimage based on the sprite name
         //int sprite = getResources().getIdentifier(spriteName, "drawable", getActivity().getPackageName());
-        GameGrid[(x*y)].setImageBitmap(sprite);//set bitmap image
+        GameGrid[x][y].setImageBitmap(sprite);//set bitmap image
     }
 
     // Draw object at specified grid location. Color hexValue.
@@ -90,26 +92,26 @@ public class GameGrid extends Fragment {
 
     // Set background color of a grid cell using androidAPI value.
     public void setBGColor(int x, int y, int colorHex){
-        GameGrid[(x*y)].setBackgroundColor(colorHex);
+        GameGrid[x][y].setBackgroundColor(colorHex);
     }
 
     // Set background colors of a grid cell using rgb values.
     public void setBGColor(int x, int y, int r, int g, int b){
-        GameGrid[(x*y)].setBackgroundColor(Color.rgb(r, g, b));
+        GameGrid[x][y].setBackgroundColor(Color.rgb(r, g, b));
     }
 
     // Set foreground color of a grid cell using androidAPI value.
     public void setFGColor(int x, int y, int colorHex){
-        Bitmap sprite = ((BitmapDrawable)GameGrid[(x*y)].getDrawable()).getBitmap();//gets the bitmap at certain imageview
+        Bitmap sprite = ((BitmapDrawable)GameGrid[x][y].getDrawable()).getBitmap();//gets the bitmap at certain imageview
         sprite.eraseColor(colorHex);//sets color of pixels to input rgb
-        GameGrid[(x*y)].setImageBitmap(sprite);//sets image view to new bitmap
+        GameGrid[x][y].setImageBitmap(sprite);//sets image view to new bitmap
     }
 
     // Set foreground color of a grid cell using rgb values.
     public void setFGColor(int x, int y, int r, int g, int b){
-        Bitmap sprite = ((BitmapDrawable)GameGrid[(x*y)].getDrawable()).getBitmap(); //gets the bitmap at certain imageview
+        Bitmap sprite = ((BitmapDrawable)GameGrid[x][y].getDrawable()).getBitmap(); //gets the bitmap at certain imageview
         sprite.eraseColor(Color.rgb(r,g,b));//sets color of pixels to input rgb
-        GameGrid[(x*y)].setImageBitmap(sprite);//sets image view to new bitmap
+        GameGrid[x][y].setImageBitmap(sprite);//sets image view to new bitmap
     }
 
     private Bitmap setSprite(NamedSymbol spriteName){
