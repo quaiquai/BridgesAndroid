@@ -53,17 +53,14 @@ public abstract class NGCKGame_AndroidVersion{
     protected boolean KeyY(){ return xy.Y(); }
 
     // /set background color of cell x, y to c
-    // /
-    protected void SetBGColor(int x, int y, int c) {
+    protected void SetBGColor(int x, int y, NamedColor c) {
         grid.setBGColor(y, x, c);
     }
 
     // /set foreground color of cell x, y to c
-    // /
-    protected void SetFGColor(int x, int y, int c) {
+    protected void SetFGColor(int x, int y, NamedColor c) {
         grid.setFGColor(y, x, c);
     }
-
 
     // /set symbol of cell x, y to s
     // /

@@ -147,5 +147,19 @@ public enum NamedColor {
     white,
     whitesmoke,
     yellow,
-    yellowgreen
+    yellowgreen;
+
+    int colorSelect;
+
+    public int getColor(){
+        switch(this){
+            case white:
+                colorSelect = -1;
+                break;
+            case blue:
+                colorSelect = -16776961;
+                break;
+        }
+        return colorSelect;
+    }
 }
