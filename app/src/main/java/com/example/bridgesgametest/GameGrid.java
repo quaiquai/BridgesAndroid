@@ -14,8 +14,8 @@ import android.widget.ImageView;
 public class GameGrid extends Fragment {
 
     // dimensions
-    public int gridX = 30;
-    public int gridY = 30;
+    public int gridX;
+    public int gridY;
 
     private Bitmap bitmapImage;
     private Bitmap subImage;
@@ -24,7 +24,7 @@ public class GameGrid extends Fragment {
     private int WIDTH;
     private int HEIGHT;
 
-    public int[] dimensions = {gridX, gridY};
+    public int[] dimensions;
 
     // Array of gridCells as ImageViews from XML game_grid.
     public ImageView[] GameGrid = new ImageView[900];
@@ -39,6 +39,10 @@ public class GameGrid extends Fragment {
         bitmapImage = BitmapFactory.decodeResource(getResources(), R.drawable.symbols);
         WIDTH = bitmapImage.getWidth() / 16;
         HEIGHT = bitmapImage.getHeight() / 16;
+
+        gridX = 30;
+        gridY = 30;
+        dimensions = new int[]{gridX, gridY};
 
         connectCells(v);
 

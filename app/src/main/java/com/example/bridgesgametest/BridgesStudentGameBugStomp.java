@@ -5,7 +5,7 @@ import android.graphics.Color;
 public class BridgesStudentGameBugStomp extends NGCKGame_AndroidVersion{
 
     int[] loc = {0,0}; // row, col
-    int[] boardSize = grid.getDimensions();
+    int[] boardSize = new int[2];
     int[] bug;
     int bugttl = 100;
     int score = 0;
@@ -13,13 +13,14 @@ public class BridgesStudentGameBugStomp extends NGCKGame_AndroidVersion{
 
     static java.util.Random randomizer;
 
-    public void initializeMethod() {
+    public void init() {
         for(int i = 0; i < grid.getDimensions()[0]; i++) { // each row
             for(int j = 0; j < grid.getDimensions()[1]; j++) { // each column
                 grid.setBGColor(i, j, Color.WHITE);
             }
         }
 
+        boardSize = grid.getDimensions();
         bug = new int[]{10,10};
     }
 
@@ -112,11 +113,12 @@ public class BridgesStudentGameBugStomp extends NGCKGame_AndroidVersion{
         return clazz.getEnumConstants()[x];
     }
 
-    public void initialMethod() {
-     // Initialize our nonblocking game
-     //BridgesStudentGameBugStomp mg = new BridgesStudentGameBugStomp();
+    public void main() {
+        // Initialize our nonblocking game
+        //BridgesStudentGameBugStomp mg = new BridgesStudentGameBugStomp();
 
-     // start running the game
-     //mg.start();
+        // start running the game
+        init();
+        start();
     }
 }

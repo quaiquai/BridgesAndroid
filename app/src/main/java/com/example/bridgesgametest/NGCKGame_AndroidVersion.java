@@ -61,12 +61,11 @@ public abstract class NGCKGame_AndroidVersion extends BufferedStart{
     public abstract void GameLoop();
 
     public void start(){
-
         h.postDelayed(new Runnable(){
             public void run(){
 
                 // Code here gets looped.
-                //GameLoop();
+                GameLoop();
 
                 h.postDelayed(this, frameDelay);
             }

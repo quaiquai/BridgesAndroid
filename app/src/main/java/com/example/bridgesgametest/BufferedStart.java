@@ -8,6 +8,7 @@ public class BufferedStart extends AppCompatActivity {
 
     ControllerDpad dp;
     GameGrid grid;
+    NGCKGame_AndroidVersion ngck;
     BridgesStudentGameBugStomp sg;
 
     @Override
