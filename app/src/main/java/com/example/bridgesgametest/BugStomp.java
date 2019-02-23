@@ -19,10 +19,11 @@ public class BugStomp extends NGCKGame_AndroidVersion{
 
         for(int i = 0; i < grid.getDimensions()[0]; i++) { // each row
             for(int j = 0; j < grid.getDimensions()[1]; j++) { // each column
-                grid.setBGColor(i, j, NamedColor.white);
+                grid.setBGColor(i, j, NamedColor.blue);
             }
         }
 
+        bugColor = NamedColor.white;
         bug = new int[]{10,10};
     }
 
@@ -50,7 +51,7 @@ public class BugStomp extends NGCKGame_AndroidVersion{
         if(bugttl < 1) {
             bug = new int[]{20, 20};
             bugttl = 3;
-            bugColor = NamedColor.white;
+            bugColor = NamedColor.blue;
             score--;
             if(score < 0) score = 0;
         } else {
@@ -84,22 +85,22 @@ public class BugStomp extends NGCKGame_AndroidVersion{
 
 
         // paint bug
-        grid.drawObject(bug[0], bug[1], NamedSymbol.bug3, bugColor);
+        grid.drawObject(bug[0], bug[1], NamedSymbol.d, bugColor);
 
         // paint current location
-        grid.drawObject(loc[0], loc[1], NamedSymbol.man, NamedColor.blue);
+        grid.drawObject(loc[0], loc[1], NamedSymbol.d, NamedColor.blue);
     }
 
     public void win() {
         // paint winner!
-        grid.drawObject(0,0, NamedSymbol.A);
-        grid.drawObject(0,1, NamedSymbol.A);
-        grid.drawObject(0,7, NamedSymbol.A);
+        grid.drawObject(0,0, NamedSymbol.d);
+        grid.drawObject(0,1, NamedSymbol.d);
+        grid.drawObject(0,7, NamedSymbol.d);
     }
 
     public void paintScore(int score) {
         // paint score
-        grid.drawObject(0,0, NamedSymbol.A);
+        grid.drawObject(0,0, NamedSymbol.d);
     }
 
     public void GameLoop() {

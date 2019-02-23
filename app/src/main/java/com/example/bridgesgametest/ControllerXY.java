@@ -10,8 +10,8 @@ import android.widget.ImageView;
 
 public class ControllerXY extends Fragment {
 
-    private ImageView btnX;
-    private ImageView btnY;
+    private ImageView xButton;
+    private ImageView yButton;
 
     private boolean isXPressed = false;
     private boolean isYPressed = false;
@@ -20,8 +20,12 @@ public class ControllerXY extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState){
         View v = inflater.inflate(R.layout.control_xy, parent, false);
 
+        // Initialize object variables for the buttons and connect them to their corresponding XML ImageViews
+        ImageView xButton = (ImageView) v.findViewById(R.id.btnX);
+        ImageView yButton = (ImageView) v.findViewById(R.id.btnY);
+
         // Action listeners:
-        btnX.setOnTouchListener(new View.OnTouchListener() {
+        xButton.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 switch (event.getAction() ){
@@ -36,7 +40,7 @@ public class ControllerXY extends Fragment {
             }
         });
 
-        btnY.setOnTouchListener(new View.OnTouchListener() {
+        yButton.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 switch (event.getAction() ){
