@@ -102,16 +102,16 @@ public class GameGrid extends Fragment {
 
     // Set foreground color of a grid cell using androidAPI value.
     public void setFGColor(int x, int y, int colorHex){
-        Bitmap sprite = ((BitmapDrawable)GameGrid[x][y].getDrawable()).getBitmap();//gets the bitmap at certain imageview
-        sprite.eraseColor(colorHex);//sets color of pixels to input rgb
-        GameGrid[x][y].setImageBitmap(sprite);//sets image view to new bitmap
+        //Bitmap sprite = ((BitmapDrawable)GameGrid[x][y].getDrawable()).getBitmap();//gets the bitmap at certain imageview
+        //sprite.eraseColor(colorHex);//sets color of pixels to input rgb
+        GameGrid[x][y].setColorFilter(colorHex);//sets image view to new bitmap
     }
 
     // Set foreground color of a grid cell using rgb values.
     public void setFGColor(int x, int y, int r, int g, int b){
-        Bitmap sprite = ((BitmapDrawable)GameGrid[x][y].getDrawable()).getBitmap(); //gets the bitmap at certain imageview
-        sprite.eraseColor(Color.rgb(r,g,b));//sets color of pixels to input rgb
-        GameGrid[x][y].setImageBitmap(sprite);//sets image view to new bitmap
+        //Bitmap sprite = ((BitmapDrawable)GameGrid[x][y].getDrawable()).getBitmap(); //gets the bitmap at certain imageview
+        //sprite.eraseColor(Color.rgb(r,g,b));//sets color of pixels to input rgb
+        GameGrid[x][y].setColorFilter(Color.rgb(r,g,b));//sets image view to new bitmap
     }
 
     private Bitmap setSprite(NamedSymbol spriteName){

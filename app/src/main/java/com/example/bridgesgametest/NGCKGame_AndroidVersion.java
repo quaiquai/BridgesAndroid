@@ -1,12 +1,8 @@
 package com.example.bridgesgametest;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.res.Resources;
 import android.os.Handler;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 
 public abstract class NGCKGame_AndroidVersion{
 
@@ -15,13 +11,6 @@ public abstract class NGCKGame_AndroidVersion{
 
     ControllerDpad dp;
     GameGrid grid;
-
-    public void getGrid(GameGrid g){
-        grid = g;
-    }
-    public void getDP(ControllerDpad d){
-        dp = d;
-    }
 
     public void handleFragment(Context con){
         c = con;

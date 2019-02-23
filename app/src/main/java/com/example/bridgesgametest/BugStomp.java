@@ -2,10 +2,11 @@ package com.example.bridgesgametest;
 
 import android.graphics.Color;
 
-public class BridgesStudentGameBugStomp extends NGCKGame_AndroidVersion{
+public class BugStomp extends NGCKGame_AndroidVersion{
+
 
     int[] loc = {0,0}; // row, col
-    int[] boardSize = new int[2];
+    int[] boardSize;
     int[] bug;
     int bugttl = 100;
     int score = 0;
@@ -14,9 +15,11 @@ public class BridgesStudentGameBugStomp extends NGCKGame_AndroidVersion{
     static java.util.Random randomizer;
 
     public void init() {
+        boardSize = grid.getDimensions();
+
         for(int i = 0; i < grid.getDimensions()[0]; i++) { // each row
             for(int j = 0; j < grid.getDimensions()[1]; j++) { // each column
-                grid.setBGColor(i, j, Color.WHITE);
+                grid.setBGColor(i, j, Color.GRAY);
             }
         }
 
@@ -47,14 +50,14 @@ public class BridgesStudentGameBugStomp extends NGCKGame_AndroidVersion{
         if(bugttl < 1) {
             bug = new int[]{randomizer.nextInt(29)+1, randomizer.nextInt(29)+1};
             bugttl = randomizer.nextInt(100-50)+50;
-            bugColor = randomizer.nextInt(Color.WHITE);
+            bugColor = Color.YELLOW;
             score--;
             if(score < 0) score = 0;
         } else {
             bugttl--;
             if(overlap(bug, loc)) {
                 bug = new int[]{randomizer.nextInt(29)+1, randomizer.nextInt(29)+1};
-                bugColor = randomizer.nextInt(Color.BLUE);
+                bugColor = Color.RED;
                 score++;
             }
         }
@@ -66,10 +69,9 @@ public class BridgesStudentGameBugStomp extends NGCKGame_AndroidVersion{
 
     public void paintScreen() {
         // paint black
-        for (int i = 0; i < 30; ++i) {
-            for (int j = 0; j < 30; ++j) {
+        for (int i = 0; i < grid.getDimensions()[0]; ++i) {
+            for (int j = 0; j < grid.getDimensions()[1]; ++j) {
                 SetBGColor(i, j, Color.BLACK);
-                DrawObject(i, j, NamedSymbol.A);
             }
         }
 
@@ -82,22 +84,23 @@ public class BridgesStudentGameBugStomp extends NGCKGame_AndroidVersion{
 
 
         // paint bug
-        grid.drawObject(bug[0], bug[1], NamedSymbol.A, bugColor);
+        grid.drawObject(bug[0], bug[1], NamedSymbol.bug3, bugColor);
 
         // paint current location
-        grid.drawObject(loc[0], loc[1], NamedSymbol.A, Color.WHITE);
+        grid.drawObject(loc[0], loc[1], NamedSymbol.man, Color.BLUE);
     }
 
     public void win() {
         // paint winner!
-        grid.drawObject(0,0, NamedSymbol.A);
-        grid.drawObject(0,1, NamedSymbol.A);
+        grid.drawObject(0,0, NamedSymbol.man);
+        grid.drawObject(0,1, NamedSymbol.W);
+        grid.drawObject(0,7, NamedSymbol.man);
     }
 
     public void paintScore(int score) {
         // paint score
-        grid.drawObject(0,0, NamedSymbol.A);
-        grid.drawObject(0,1, NamedSymbol.A);
+        grid.drawObject(0,0, NamedSymbol.S);
+        grid.drawObject(0,6, NamedSymbol.values()[score + 53]);
     }
 
     public void GameLoop() {
@@ -113,11 +116,9 @@ public class BridgesStudentGameBugStomp extends NGCKGame_AndroidVersion{
     }
 
     public void main() {
-     // Initialize our nonblocking game
-     //BridgesStudentGameBugStomp mg = new BridgesStudentGameBugStomp();
-
-     // start running the game
+        // start running the game
         init();
-        //start();
+        start();
     }
+
 }

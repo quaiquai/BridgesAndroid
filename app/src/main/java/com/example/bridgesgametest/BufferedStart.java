@@ -1,13 +1,12 @@
 package com.example.bridgesgametest;
 
 import android.content.pm.ActivityInfo;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 public class BufferedStart extends AppCompatActivity {
 
-    BridgesStudentGameBugStomp sg;
+    BugStomp sg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,9 +20,10 @@ public class BufferedStart extends AppCompatActivity {
     protected void onResume(){
         super.onResume();
 
-        sg = new BridgesStudentGameBugStomp();
+        sg = new BugStomp();
 
         sg.handleFragment(this);
+
         sg.main();
     }
 }
