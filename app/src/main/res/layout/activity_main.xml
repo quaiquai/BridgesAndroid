@@ -3,13 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".BugStompSeparateTimers">
 
-    <fragment
-        android:name="com.example.bridgesgametest.NGCKGame_AndroidVersion"
-        android:id="@+id/GameView"
+    <LinearLayout
+        android:id="@+id/cont"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    </fragment>
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+    </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

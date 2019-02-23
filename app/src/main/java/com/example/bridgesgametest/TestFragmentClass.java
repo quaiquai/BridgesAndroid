@@ -14,7 +14,7 @@ import android.widget.TextView;
 import java.util.Random;
 
 public class TestFragmentClass extends AppCompatActivity {
-
+    /**
     public GameGrid gm;
     public ControllerDpad dp;
 
@@ -78,4 +78,5 @@ public class TestFragmentClass extends AppCompatActivity {
             }
         }, fps);
     }
+    **/
 }

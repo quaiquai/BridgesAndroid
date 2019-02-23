@@ -42,7 +42,7 @@ public class GameGrid extends Fragment {
 
         gridX = 30;
         gridY = 30;
-        dimensions = new int[]{gridX, gridY};
+        dimensions = new int[] {gridX, gridY};
 
         connectCells(v);
 
@@ -58,6 +58,7 @@ public class GameGrid extends Fragment {
             cellName = cellNameBase+(i+1);
             cellID = getResources().getIdentifier(cellName, "id", getActivity().getPackageName());
             GameGrid[i] = v.findViewById(cellID);
+            GameGrid[i].setBackgroundColor(Color.GREEN);
         }
     }
 

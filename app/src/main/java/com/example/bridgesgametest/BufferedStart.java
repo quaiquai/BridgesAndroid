@@ -1,14 +1,12 @@
 package com.example.bridgesgametest;
 
 import android.content.pm.ActivityInfo;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 public class BufferedStart extends AppCompatActivity {
 
-    ControllerDpad dp;
-    GameGrid grid;
-    NGCKGame_AndroidVersion ngck;
     BridgesStudentGameBugStomp sg;
 
     @Override
@@ -17,6 +15,15 @@ public class BufferedStart extends AppCompatActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         setContentView(R.layout.game_view);
 
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+
         sg = new BridgesStudentGameBugStomp();
+
+        sg.handleFragment(this);
+        sg.main();
     }
 }

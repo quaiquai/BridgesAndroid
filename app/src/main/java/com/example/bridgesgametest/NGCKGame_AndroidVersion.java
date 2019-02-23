@@ -1,18 +1,39 @@
 package com.example.bridgesgametest;
 
-import android.os.Bundle;
+import android.app.Activity;
+import android.content.Context;
+import android.content.res.Resources;
 import android.os.Handler;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
+import android.support.v4.app.FragmentManager;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.view.ViewGroup;
 
-public abstract class NGCKGame_AndroidVersion extends BufferedStart{
+public abstract class NGCKGame_AndroidVersion{
+
+    AppCompatActivity a;
+    Context c;
+
+    ControllerDpad dp;
+    GameGrid grid;
+
+    public void getGrid(GameGrid g){
+        grid = g;
+    }
+    public void getDP(ControllerDpad d){
+        dp = d;
+    }
+
+    public void handleFragment(Context con){
+        c = con;
+        a = (AppCompatActivity) c;
+        dp = (ControllerDpad) a.getSupportFragmentManager().findFragmentById(R.id.Dpad);
+        grid = (GameGrid) a.getSupportFragmentManager().findFragmentById(R.id.GridFragment);
+    }
 
     // Handler for loop management.
     private Handler h = new Handler();
     // Sets the delay for the GameLoop.
-    private int frameDelay;
+    private int frameDelay = 100;
 
     // / @return true if "left" is pressed
     protected boolean KeyLeft() {

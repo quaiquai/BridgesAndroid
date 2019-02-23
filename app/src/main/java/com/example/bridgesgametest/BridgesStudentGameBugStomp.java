@@ -14,13 +14,12 @@ public class BridgesStudentGameBugStomp extends NGCKGame_AndroidVersion{
     static java.util.Random randomizer;
 
     public void init() {
-        for(int i = 0; i < grid.getDimensions()[0]; i++) { // each row
-            for(int j = 0; j < grid.getDimensions()[1]; j++) { // each column
+        for(int i = 0; i < 30; i++) { // each row
+            for(int j = 0; j < 30; j++) { // each column
                 grid.setBGColor(i, j, Color.WHITE);
             }
         }
 
-        boardSize = grid.getDimensions();
         bug = new int[]{10,10};
     }
 
@@ -114,11 +113,11 @@ public class BridgesStudentGameBugStomp extends NGCKGame_AndroidVersion{
     }
 
     public void main() {
-        // Initialize our nonblocking game
-        //BridgesStudentGameBugStomp mg = new BridgesStudentGameBugStomp();
+     // Initialize our nonblocking game
+     //BridgesStudentGameBugStomp mg = new BridgesStudentGameBugStomp();
 
-        // start running the game
+     // start running the game
         init();
-        start();
+        //start();
     }
 }
