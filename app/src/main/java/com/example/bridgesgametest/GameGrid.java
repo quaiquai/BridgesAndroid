@@ -136,7 +136,185 @@ public class GameGrid extends Fragment {
             case E:
                 subImage = Bitmap.createBitmap(bitmapImage, 5* WIDTH, 0* HEIGHT ,WIDTH ,HEIGHT);
                 break;
+            case F:
+                subImage = Bitmap.createBitmap(bitmapImage, 6* WIDTH, 0* HEIGHT ,WIDTH ,HEIGHT);
+                break;
+            case G:
+                subImage = Bitmap.createBitmap(bitmapImage, 7* WIDTH, 0* HEIGHT ,WIDTH ,HEIGHT);
+                break;
+            case H:
+                subImage = Bitmap.createBitmap(bitmapImage, 8* WIDTH, 0* HEIGHT ,WIDTH ,HEIGHT);
+                break;
+            case I:
+                subImage = Bitmap.createBitmap(bitmapImage, 9* WIDTH, 0* HEIGHT ,WIDTH ,HEIGHT);
+                break;
+            case J:
+                subImage = Bitmap.createBitmap(bitmapImage, 10* WIDTH, 0* HEIGHT ,WIDTH ,HEIGHT);
+                break;
+            case K:
+                subImage = Bitmap.createBitmap(bitmapImage, 11* WIDTH, 0* HEIGHT ,WIDTH ,HEIGHT);
+                break;
+            case L:
+                subImage = Bitmap.createBitmap(bitmapImage, 12* WIDTH, 0* HEIGHT ,WIDTH ,HEIGHT);
+                break;
+            case M:
+                subImage = Bitmap.createBitmap(bitmapImage, 13* WIDTH, 0* HEIGHT ,WIDTH ,HEIGHT);
+                break;
+            case N:
+                subImage = Bitmap.createBitmap(bitmapImage, 14* WIDTH, 0* HEIGHT ,WIDTH ,HEIGHT);
+                break;
+            case O:
+                subImage = Bitmap.createBitmap(bitmapImage, 15* WIDTH, 0* HEIGHT ,WIDTH ,HEIGHT);
+                break;
+            case P:
+                subImage = Bitmap.createBitmap(bitmapImage, 16* WIDTH, 0* HEIGHT ,WIDTH ,HEIGHT);
+                break;
+            case Q:
+                subImage = Bitmap.createBitmap(bitmapImage, 17* WIDTH, 0* HEIGHT ,WIDTH ,HEIGHT);
+                break;
+            case R:
+                subImage = Bitmap.createBitmap(bitmapImage, 18* WIDTH, 0* HEIGHT ,WIDTH ,HEIGHT);
+                break;
+            case S:
+                subImage = Bitmap.createBitmap(bitmapImage, 19* WIDTH, 0* HEIGHT ,WIDTH ,HEIGHT);
+                break;
+            case T:
+                subImage = Bitmap.createBitmap(bitmapImage, 20* WIDTH, 0* HEIGHT ,WIDTH ,HEIGHT);
+                break;
+            case U:
+                subImage = Bitmap.createBitmap(bitmapImage, 21* WIDTH, 0* HEIGHT ,WIDTH ,HEIGHT);
+                break;
+            case V:
+                subImage = Bitmap.createBitmap(bitmapImage, 22* WIDTH, 0* HEIGHT ,WIDTH ,HEIGHT);
+                break;
+            case W:
+                subImage = Bitmap.createBitmap(bitmapImage, 23* WIDTH, 0* HEIGHT ,WIDTH ,HEIGHT);
+                break;
+            case X:
+                subImage = Bitmap.createBitmap(bitmapImage, 24* WIDTH, 0* HEIGHT ,WIDTH ,HEIGHT);
+                break;
+            case Y:
+                subImage = Bitmap.createBitmap(bitmapImage, 25* WIDTH, 0* HEIGHT ,WIDTH ,HEIGHT);
+                break;
+            case Z:
+                subImage = Bitmap.createBitmap(bitmapImage, 26* WIDTH, 0* HEIGHT ,WIDTH ,HEIGHT);
+                break;
+            case B:
+                subImage = Bitmap.createBitmap(bitmapImage, 27* WIDTH, 0* HEIGHT ,WIDTH ,HEIGHT);
+                break;
+            case C:
+                subImage = Bitmap.createBitmap(bitmapImage, 28* WIDTH, 0* HEIGHT ,WIDTH ,HEIGHT);
+                break;
+            case D:
+                subImage = Bitmap.createBitmap(bitmapImage, 29* WIDTH, 0* HEIGHT ,WIDTH ,HEIGHT);
+                break;
+            case E:
+                subImage = Bitmap.createBitmap(bitmapImage, 30* WIDTH, 0* HEIGHT ,WIDTH ,HEIGHT);
+                break;
         }
         return subImage;
     }
+/**
+    lA,
+    lB,
+    lC,
+    lD,
+    lE,
+    lF,
+    lG,
+    lH,
+    lI,
+    lJ,
+    lK,
+    lL,
+    lM,
+    lN,
+    lO,
+    lP,
+    lQ,
+    lR,
+    lS,
+    lT,
+    lU,
+    lV,
+    lW,
+    lX,
+    lY,
+    lZ,
+    zero,
+    one,
+    two,
+    three,
+    four,
+    five,
+    six,
+    seven,
+    eight,
+    nine,
+    circle,
+    square,
+    diamond,
+    downtriangle,
+    uptriangle,
+    leftrigangle,
+    righttriangle,
+    man,
+    woman,
+    cat,
+    pawn,
+    bishop,
+    knight,
+    king,
+    queen,
+    rook,
+    rightarrow,
+    leftarrow,
+    uparrow,
+    downarrow,
+    hexagram,
+    droplet,
+    heart,
+    lightning,
+    thoughtcould,
+    speechbubble,
+    flower,
+    stripsqueare,
+    screw,
+    xcircle,
+    diamondtop,
+    sword,
+    viking,
+    space,
+    crosshair,
+    waves,
+    rain,
+    drink,
+    paperclip,
+    elephant,
+    cowboyhat,
+    hat,
+    flag,
+    bomb,
+    polarbear,
+    giraffe,
+    bug1,
+    bug2,
+    bug3,
+    magnifying,
+    fish,
+    duck,
+    sloth,
+    bird,
+    apple,
+    carrot,
+    lemon,
+    pumpkin,
+    onion,
+    potionbottle,
+    potion,
+    bowarrow,
+    fire,
+    boldO,
+    monitor
+ **/
 }
