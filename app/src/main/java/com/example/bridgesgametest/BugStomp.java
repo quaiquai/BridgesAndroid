@@ -10,7 +10,7 @@ public class BugStomp extends NGCKGame_AndroidVersion{
     int[] bug;
     int bugttl = 100;
     int score = 0;
-    int bugColor;
+    NamedColor bugColor;
 
     static java.util.Random randomizer;
 
@@ -19,7 +19,7 @@ public class BugStomp extends NGCKGame_AndroidVersion{
 
         for(int i = 0; i < grid.getDimensions()[0]; i++) { // each row
             for(int j = 0; j < grid.getDimensions()[1]; j++) { // each column
-                grid.setBGColor(i, j, Color.GRAY);
+                grid.setBGColor(i, j, NamedColor.white);
             }
         }
 
@@ -50,14 +50,14 @@ public class BugStomp extends NGCKGame_AndroidVersion{
         if(bugttl < 1) {
             bug = new int[]{20, 20};
             bugttl = 3;
-            bugColor = Color.YELLOW;
+            bugColor = NamedColor.white;
             score--;
             if(score < 0) score = 0;
         } else {
             bugttl--;
             if(overlap(bug, loc)) {
                 bug = new int[]{10, 10};
-                bugColor = Color.RED;
+                bugColor = NamedColor.blue;
                 score++;
             }
         }
@@ -71,7 +71,7 @@ public class BugStomp extends NGCKGame_AndroidVersion{
         // paint black
         for (int i = 0; i < 30; ++i) {
             for (int j = 0; j < 30; ++j) {
-                SetBGColor(i, j, Color.WHITE);
+                SetBGColor(i, j, NamedColor.white);
             }
         }
 
@@ -87,7 +87,7 @@ public class BugStomp extends NGCKGame_AndroidVersion{
         grid.drawObject(bug[0], bug[1], NamedSymbol.bug3, bugColor);
 
         // paint current location
-        grid.drawObject(loc[0], loc[1], NamedSymbol.man, Color.BLUE);
+        grid.drawObject(loc[0], loc[1], NamedSymbol.man, NamedColor.blue);
     }
 
     public void win() {
