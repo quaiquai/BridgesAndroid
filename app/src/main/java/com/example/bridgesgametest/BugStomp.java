@@ -71,7 +71,7 @@ public class BugStomp extends NGCKGame_AndroidVersion{
         // paint black
         for (int i = 0; i < 30; ++i) {
             for (int j = 0; j < 30; ++j) {
-                SetBGColor(i, j, Color.BLACK);
+                SetBGColor(i, j, Color.WHITE);
             }
         }
 

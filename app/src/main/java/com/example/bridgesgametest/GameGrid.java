@@ -151,6 +151,7 @@ public class GameGrid extends Fragment {
             case J:
                 subImage = Bitmap.createBitmap(bitmapImage, 10* WIDTH, 0* HEIGHT ,WIDTH ,HEIGHT);
                 break;
+    /**
             case K:
                 subImage = Bitmap.createBitmap(bitmapImage, 11* WIDTH, 0* HEIGHT ,WIDTH ,HEIGHT);
                 break;
@@ -502,6 +503,7 @@ public class GameGrid extends Fragment {
             case monitor:
                 subImage = Bitmap.createBitmap(bitmapImage, 114* WIDTH, 0* HEIGHT ,WIDTH ,HEIGHT);
                 break;
+  **/
         }
         return subImage;
     }

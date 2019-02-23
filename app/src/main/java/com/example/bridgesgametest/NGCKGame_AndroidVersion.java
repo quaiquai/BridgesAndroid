@@ -9,14 +9,16 @@ public abstract class NGCKGame_AndroidVersion{
     AppCompatActivity a;
     Context c;
 
-    ControllerDpad dp;
     GameGrid grid;
+    ControllerDpad dp;
+    ControllerXY xy;
 
     public void handleFragment(Context con){
         c = con;
         a = (AppCompatActivity) c;
-        dp = (ControllerDpad) a.getSupportFragmentManager().findFragmentById(R.id.Dpad);
         grid = (GameGrid) a.getSupportFragmentManager().findFragmentById(R.id.GridFragment);
+        dp = (ControllerDpad) a.getSupportFragmentManager().findFragmentById(R.id.Dpad);
+        xy =(ControllerXY) a.getSupportFragmentManager().findFragmentById(R.id.XY);
     }
 
     // Handler for loop management.
@@ -43,6 +45,12 @@ public abstract class NGCKGame_AndroidVersion{
     protected boolean KeyDown() {
         return dp.down();
     }
+
+    // Return true if x button is pressed.
+    protected boolean KeyX(){ return xy.X(); }
+
+    // Return true if y button is pressed.
+    protected boolean KeyY(){ return xy.Y(); }
 
     // /set background color of cell x, y to c
     // /
