@@ -53,13 +53,16 @@ public class GameGrid extends Fragment {
     public void connectCells(View v){
         String cellNameBase = "gameCell";
         String cellName;
+        int cellCounter = 1;
         int cellID;
+
         for (int i = 0; i < 30; i++){
             for (int j = 0; j < 30; j++){
-                cellName = cellNameBase+(i+1);
+                cellName = cellNameBase+(cellCounter);
                 cellID = getResources().getIdentifier(cellName, "id", getActivity().getPackageName());
                 GameGrid[i][j] = v.findViewById(cellID);
                 GameGrid[i][j].setBackgroundColor(Color.GREEN);
+                cellCounter++;
             }
         }
     }
@@ -75,6 +78,7 @@ public class GameGrid extends Fragment {
     public void drawObject(int x, int y, NamedSymbol spriteName, int color){
         Bitmap sprite = setSprite(spriteName);//will get the subimage based on the sprite name
         //int sprite = getResources().getIdentifier(spriteName, "drawable", getActivity().getPackageName());
+        GameGrid[x][y].setImageBitmap(sprite);
         setFGColor(x, y, color);//set bitmap color
     }
 
@@ -82,6 +86,7 @@ public class GameGrid extends Fragment {
     public void drawObject(int x, int y, NamedSymbol spriteName, int red, int blue, int green){
         Bitmap sprite = setSprite(spriteName);//will get the subimage based on the sprite name
         //int sprite = getResources().getIdentifier(spriteName, "drawable", getActivity().getPackageName());
+        GameGrid[x][y].setImageBitmap(sprite);
         setFGColor(x, y, red, blue, green);//set the bitmaps color
     }
 

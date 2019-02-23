@@ -13,7 +13,6 @@ public class BufferedStart extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         setContentView(R.layout.game_view);
-
     }
 
     @Override

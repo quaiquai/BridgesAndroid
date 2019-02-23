@@ -48,15 +48,15 @@ public class BugStomp extends NGCKGame_AndroidVersion{
 
     public void handlebug() {
         if(bugttl < 1) {
-            bug = new int[]{randomizer.nextInt(29)+1, randomizer.nextInt(29)+1};
-            bugttl = randomizer.nextInt(100-50)+50;
+            bug = new int[]{20, 20};
+            bugttl = 3;
             bugColor = Color.YELLOW;
             score--;
             if(score < 0) score = 0;
         } else {
             bugttl--;
             if(overlap(bug, loc)) {
-                bug = new int[]{randomizer.nextInt(29)+1, randomizer.nextInt(29)+1};
+                bug = new int[]{10, 10};
                 bugColor = Color.RED;
                 score++;
             }
@@ -69,8 +69,8 @@ public class BugStomp extends NGCKGame_AndroidVersion{
 
     public void paintScreen() {
         // paint black
-        for (int i = 0; i < grid.getDimensions()[0]; ++i) {
-            for (int j = 0; j < grid.getDimensions()[1]; ++j) {
+        for (int i = 0; i < 30; ++i) {
+            for (int j = 0; j < 30; ++j) {
                 SetBGColor(i, j, Color.BLACK);
             }
         }
@@ -92,19 +92,18 @@ public class BugStomp extends NGCKGame_AndroidVersion{
 
     public void win() {
         // paint winner!
-        grid.drawObject(0,0, NamedSymbol.man);
-        grid.drawObject(0,1, NamedSymbol.W);
-        grid.drawObject(0,7, NamedSymbol.man);
+        grid.drawObject(0,0, NamedSymbol.A);
+        grid.drawObject(0,1, NamedSymbol.A);
+        grid.drawObject(0,7, NamedSymbol.A);
     }
 
     public void paintScore(int score) {
         // paint score
-        grid.drawObject(0,0, NamedSymbol.S);
-        grid.drawObject(0,6, NamedSymbol.values()[score + 53]);
+        grid.drawObject(0,0, NamedSymbol.A);
     }
 
     public void GameLoop() {
-        if(score >= 10) System.exit(0);
+        //if(score >= 10) System.exit(0);
         handlebug();
         handleInput();
         paintScreen();
@@ -117,6 +116,7 @@ public class BugStomp extends NGCKGame_AndroidVersion{
 
     public void main() {
         // start running the game
+        //grid.setFGColor(20,20,Color.RED);
         init();
         start();
     }
