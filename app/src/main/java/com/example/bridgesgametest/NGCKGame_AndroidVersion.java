@@ -7,24 +7,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public abstract class NGCKGame_AndroidVersion {
-
-    // / the game map.
-    protected GameGrid grid;
-
-    // /helper class to make Input Management a bit easier.
-    private ControllerDpad dp;
+public abstract class NGCKGame_AndroidVersion extends BufferedStart{
 
     // Handler for loop management.
     private Handler h = new Handler();
     // Sets the delay for the GameLoop.
     private int frameDelay;
-
-    protected void init(GameGrid gg, ControllerDpad cdp){
-        grid = gg;
-        dp = cdp;
-        frameDelay = 100;
-    }
 
     // / @return true if "left" is pressed
     protected boolean KeyLeft() {
