@@ -6,7 +6,9 @@ import android.support.v7.app.AppCompatActivity;
 
 public class BufferedStart extends AppCompatActivity {
 
-    BugStomp sg;
+    BugStomp bs;
+    Snake sn;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,10 +21,13 @@ public class BufferedStart extends AppCompatActivity {
     protected void onResume(){
         super.onResume();
 
-        sg = new BugStomp();
-
-        sg.handleFragment(this);
-
-        sg.main();
+        /**
+        bs = new BugStomp();
+        bs.handleFragment(this); // this must be called before the students main method
+        bs.main();
+         **/
+        sn = new Snake();
+        sn.handleFragment(this);
+        sn.main();
     }
 }

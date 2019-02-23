@@ -24,9 +24,6 @@ public class GameGrid extends Fragment {
     // Array of gridCells as ImageViews from XML game_grid.
     public ImageView[][] GameGrid = new ImageView[30][30];
 
-    // A single cell ImageView object so cells can be accessed one at a time.
-    public ImageView singleCell;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState){
         View v = inflater.inflate(R.layout.game_grid, parent, false);
@@ -49,12 +46,11 @@ public class GameGrid extends Fragment {
         int cellCounter = 1;
         int cellID;
 
-        for (int i = 0; i < 30; i++){
-            for (int j = 0; j < 30; j++){
+        for (int i = 0; i < gridX; i++){
+            for (int j = 0; j < gridY; j++){
                 cellName = cellNameBase+(cellCounter);
                 cellID = getResources().getIdentifier(cellName, "id", getActivity().getPackageName());
                 GameGrid[i][j] = v.findViewById(cellID);
-                GameGrid[i][j].setBackgroundColor(Color.GREEN);
                 cellCounter++;
             }
         }

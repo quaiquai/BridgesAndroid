@@ -3,13 +3,13 @@ package com.example.bridgesgametest;
 public class Snake extends NGCKGame_AndroidVersion{
 
     java.util.Random random = new java.util.Random();
-    int gridColumns = grid.getDimensions()[0];
-    int gridRows = grid.getDimensions()[1];
+    int gridColumns;
+    int gridRows;
 
-    final long FRAMERATE = 1000000000 / 15;
-    int startX = gridColumns/3;
-    int startY = gridRows/2;
-    int startLength = 3;
+    final long FRAMERATE = 1000000000 / 15;;
+    int startX;
+    int startY;
+    int startLength;
 
     long frameTime;
     long nextFrameTime;
@@ -26,12 +26,6 @@ public class Snake extends NGCKGame_AndroidVersion{
     NamedColor fg = NamedColor.silver;
     NamedColor hc = NamedColor.white;
     NamedColor ac = NamedColor.red;
-
-    public Snake(int assid, String login, String apiKey) {
-        //super(assid, login, apiKey);
-
-
-    }
 
     public void handleInput() {
         if (KeyLeft() && dir != Direction.EAST && lastDir != Direction.EAST) {
@@ -171,8 +165,8 @@ public class Snake extends NGCKGame_AndroidVersion{
         Block current = head;
 
         for (int i = 0; i < startLength; ++i) {
-            SetBGColor(startX - i, startY, fg);
             if (i > 0) {
+                SetBGColor(startX - i, startY, fg);
                 current.next = new Block(startX - i, startY);
                 current = current.next;
             }
@@ -208,11 +202,18 @@ public class Snake extends NGCKGame_AndroidVersion{
         }
     }
 
-    public static void main(String args[]) {
-        Snake game = new Snake(10, "username", "apikey");
-        //game.setTitle("snake");
+    public void main() {
 
-        game.start();
+        gridColumns = grid.getDimensions()[0];
+        gridRows = grid.getDimensions()[1];
+
+        startX = gridColumns/3;
+        startY = gridRows/2;
+        startLength = 3;
+
+        initialize();
+
+        start();
     }
 }
 
