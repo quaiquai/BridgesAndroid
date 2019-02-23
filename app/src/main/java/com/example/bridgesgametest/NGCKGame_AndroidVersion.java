@@ -69,7 +69,7 @@ public abstract class NGCKGame_AndroidVersion{
     }
 
     // set symbol and foreground color of cell x, y to s and c
-    protected void DrawObject(int x, int y, NamedSymbol s, int c) {
+    protected void DrawObject(int x, int y, NamedSymbol s, NamedColor c) {
         grid.drawObject(y, x, s, c);
     }
 
