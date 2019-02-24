@@ -8,7 +8,6 @@ public abstract class NGCKGame_AndroidVersion{
 
     AppCompatActivity a;
     Context c;
-
     GameGrid grid;
     ControllerDpad dp;
     ControllerXY xy;
@@ -53,9 +52,7 @@ public abstract class NGCKGame_AndroidVersion{
     protected boolean KeyY(){ return xy.Y(); }
 
     // /set background color of cell x, y to c
-    protected void SetBGColor(int x, int y, NamedColor c) {
-        grid.setBGColor(y, x, c);
-    }
+    protected void SetBGColor(int x, int y, NamedColor c) { grid.setBGColor(y, x, c); }
 
     // /set foreground color of cell x, y to c
     protected void SetFGColor(int x, int y, NamedColor c) {
@@ -63,25 +60,20 @@ public abstract class NGCKGame_AndroidVersion{
     }
 
     // /set symbol of cell x, y to s
-    // /
     protected void DrawObject(int x, int y, NamedSymbol s) {
         grid.drawObject(y, x, s);
     }
 
     // set symbol and foreground color of cell x, y to s and c
-    protected void DrawObject(int x, int y, NamedSymbol s, NamedColor c) {
-        grid.drawObject(y, x, s, c);
-    }
+    protected void DrawObject(int x, int y, NamedSymbol s, NamedColor c) { grid.drawObject(y, x, s, c); }
 
     public abstract void GameLoop();
 
     public void start(){
         h.postDelayed(new Runnable(){
             public void run(){
-
                 // Code here gets looped.
                 GameLoop();
-
                 h.postDelayed(this, frameDelay);
             }
         }, frameDelay);

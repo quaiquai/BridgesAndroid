@@ -352,205 +352,205 @@ public enum NamedSymbol {
                 subImage = Bitmap.createBitmap(bitmapImage, 15 * WIDTH, 3 * HEIGHT, WIDTH, HEIGHT);
                 break;
             case circle:
-                subImage = Bitmap.createBitmap(bitmapImage, 0 * WIDTH, 3 * HEIGHT, WIDTH, HEIGHT);
-                break;
-            case square:
-                subImage = Bitmap.createBitmap(bitmapImage, 1 * WIDTH, 3 * HEIGHT, WIDTH, HEIGHT);
-                break;
-            case diamond:
-                subImage = Bitmap.createBitmap(bitmapImage, 2 * WIDTH, 3 * HEIGHT, WIDTH, HEIGHT);
-                break;
-            case triangle_down:
-                subImage = Bitmap.createBitmap(bitmapImage, 3 * WIDTH, 3 * HEIGHT, WIDTH, HEIGHT);
-                break;
-            case triangle_up:
-                subImage = Bitmap.createBitmap(bitmapImage, 4 * WIDTH, 3 * HEIGHT, WIDTH, HEIGHT);
-                break;
-            case triangle_left:
-                subImage = Bitmap.createBitmap(bitmapImage, 5 * WIDTH, 3 * HEIGHT, WIDTH, HEIGHT);
-                break;
-            case triangle_right:
-                subImage = Bitmap.createBitmap(bitmapImage, 6 * WIDTH, 3 * HEIGHT, WIDTH, HEIGHT);
-                break;
-            case man:
-                subImage = Bitmap.createBitmap(bitmapImage, 7 * WIDTH, 3 * HEIGHT, WIDTH, HEIGHT);
-                break;
-            case woman:
-                subImage = Bitmap.createBitmap(bitmapImage, 8 * WIDTH, 3 * HEIGHT, WIDTH, HEIGHT);
-                break;
-            case cat:
-                subImage = Bitmap.createBitmap(bitmapImage, 9 * WIDTH, 3 * HEIGHT, WIDTH, HEIGHT);
-                break;
-            case pawn:
-                subImage = Bitmap.createBitmap(bitmapImage, 10 * WIDTH, 3 * HEIGHT, WIDTH, HEIGHT);
-                break;
-            case knight:
-                subImage = Bitmap.createBitmap(bitmapImage, 11 * WIDTH, 3 * HEIGHT, WIDTH, HEIGHT);
-                break;
-            case bishop:
-                subImage = Bitmap.createBitmap(bitmapImage, 12 * WIDTH, 3 * HEIGHT, WIDTH, HEIGHT);
-                break;
-            case rook:
-                subImage = Bitmap.createBitmap(bitmapImage, 13 * WIDTH, 3 * HEIGHT, WIDTH, HEIGHT);
-                break;
-            case queen:
-                subImage = Bitmap.createBitmap(bitmapImage, 14 * WIDTH, 3 * HEIGHT, WIDTH, HEIGHT);
-                break;
-            case king:
-                subImage = Bitmap.createBitmap(bitmapImage, 15 * WIDTH, 3 * HEIGHT, WIDTH, HEIGHT);
-                break;
-            case arrow_right:
                 subImage = Bitmap.createBitmap(bitmapImage, 0 * WIDTH, 4 * HEIGHT, WIDTH, HEIGHT);
                 break;
-            case arrow_left:
+            case square:
                 subImage = Bitmap.createBitmap(bitmapImage, 1 * WIDTH, 4 * HEIGHT, WIDTH, HEIGHT);
                 break;
-            case arrow_up:
+            case diamond:
                 subImage = Bitmap.createBitmap(bitmapImage, 2 * WIDTH, 4 * HEIGHT, WIDTH, HEIGHT);
                 break;
-            case arrow_down:
+            case triangle_down:
                 subImage = Bitmap.createBitmap(bitmapImage, 3 * WIDTH, 4 * HEIGHT, WIDTH, HEIGHT);
                 break;
-            case star:
+            case triangle_up:
                 subImage = Bitmap.createBitmap(bitmapImage, 4 * WIDTH, 4 * HEIGHT, WIDTH, HEIGHT);
                 break;
-            case droplet:
+            case triangle_left:
                 subImage = Bitmap.createBitmap(bitmapImage, 5 * WIDTH, 4 * HEIGHT, WIDTH, HEIGHT);
                 break;
-            case heart:
+            case triangle_right:
                 subImage = Bitmap.createBitmap(bitmapImage, 6 * WIDTH, 4 * HEIGHT, WIDTH, HEIGHT);
                 break;
-            case lightning:
+            case man:
                 subImage = Bitmap.createBitmap(bitmapImage, 7 * WIDTH, 4 * HEIGHT, WIDTH, HEIGHT);
                 break;
-            case thoughtbubble:
+            case woman:
                 subImage = Bitmap.createBitmap(bitmapImage, 8 * WIDTH, 4 * HEIGHT, WIDTH, HEIGHT);
                 break;
-            case speechbubble:
+            case cat:
                 subImage = Bitmap.createBitmap(bitmapImage, 9 * WIDTH, 4 * HEIGHT, WIDTH, HEIGHT);
                 break;
-            case flower:
+            case pawn:
                 subImage = Bitmap.createBitmap(bitmapImage, 10 * WIDTH, 4 * HEIGHT, WIDTH, HEIGHT);
                 break;
-            case square_thatch:
+            case knight:
                 subImage = Bitmap.createBitmap(bitmapImage, 11 * WIDTH, 4 * HEIGHT, WIDTH, HEIGHT);
                 break;
-            case circle_x:
+            case bishop:
                 subImage = Bitmap.createBitmap(bitmapImage, 12 * WIDTH, 4 * HEIGHT, WIDTH, HEIGHT);
                 break;
-            case circle_x2:
+            case rook:
                 subImage = Bitmap.createBitmap(bitmapImage, 13 * WIDTH, 4 * HEIGHT, WIDTH, HEIGHT);
                 break;
-            case circle_segment:
+            case queen:
                 subImage = Bitmap.createBitmap(bitmapImage, 14 * WIDTH, 4 * HEIGHT, WIDTH, HEIGHT);
                 break;
-            case empty1:
+            case king:
                 subImage = Bitmap.createBitmap(bitmapImage, 15 * WIDTH, 4 * HEIGHT, WIDTH, HEIGHT);
                 break;
-            case sword:
+            case arrow_right:
                 subImage = Bitmap.createBitmap(bitmapImage, 0 * WIDTH, 5 * HEIGHT, WIDTH, HEIGHT);
                 break;
-            case horn_helmet:
+            case arrow_left:
                 subImage = Bitmap.createBitmap(bitmapImage, 1 * WIDTH, 5 * HEIGHT, WIDTH, HEIGHT);
                 break;
-            case astro_helmet:
+            case arrow_up:
                 subImage = Bitmap.createBitmap(bitmapImage, 2 * WIDTH, 5 * HEIGHT, WIDTH, HEIGHT);
                 break;
-            case target:
+            case arrow_down:
                 subImage = Bitmap.createBitmap(bitmapImage, 3 * WIDTH, 5 * HEIGHT, WIDTH, HEIGHT);
                 break;
-            case empty2:
+            case star:
                 subImage = Bitmap.createBitmap(bitmapImage, 4 * WIDTH, 5 * HEIGHT, WIDTH, HEIGHT);
                 break;
-            case waves:
+            case droplet:
                 subImage = Bitmap.createBitmap(bitmapImage, 5 * WIDTH, 5 * HEIGHT, WIDTH, HEIGHT);
                 break;
-            case rain:
+            case heart:
                 subImage = Bitmap.createBitmap(bitmapImage, 6 * WIDTH, 5 * HEIGHT, WIDTH, HEIGHT);
                 break;
-            case drink:
+            case lightning:
                 subImage = Bitmap.createBitmap(bitmapImage, 7 * WIDTH, 5 * HEIGHT, WIDTH, HEIGHT);
                 break;
-            case paperclip:
+            case thoughtbubble:
                 subImage = Bitmap.createBitmap(bitmapImage, 8 * WIDTH, 5 * HEIGHT, WIDTH, HEIGHT);
                 break;
-            case elephant:
+            case speechbubble:
                 subImage = Bitmap.createBitmap(bitmapImage, 9 * WIDTH, 5 * HEIGHT, WIDTH, HEIGHT);
                 break;
-            case cowboyhat:
+            case flower:
                 subImage = Bitmap.createBitmap(bitmapImage, 10 * WIDTH, 5 * HEIGHT, WIDTH, HEIGHT);
                 break;
-            case ballcap:
+            case square_thatch:
                 subImage = Bitmap.createBitmap(bitmapImage, 11 * WIDTH, 5 * HEIGHT, WIDTH, HEIGHT);
                 break;
-            case flag:
+            case circle_x:
                 subImage = Bitmap.createBitmap(bitmapImage, 12 * WIDTH, 5 * HEIGHT, WIDTH, HEIGHT);
                 break;
-            case bomb:
+            case circle_x2:
                 subImage = Bitmap.createBitmap(bitmapImage, 13 * WIDTH, 5 * HEIGHT, WIDTH, HEIGHT);
                 break;
-            case bear:
+            case circle_segment:
                 subImage = Bitmap.createBitmap(bitmapImage, 14 * WIDTH, 5 * HEIGHT, WIDTH, HEIGHT);
                 break;
-            case giraffe:
+            case empty1:
                 subImage = Bitmap.createBitmap(bitmapImage, 15 * WIDTH, 5 * HEIGHT, WIDTH, HEIGHT);
                 break;
-            case bug1:
+            case sword:
                 subImage = Bitmap.createBitmap(bitmapImage, 0 * WIDTH, 6 * HEIGHT, WIDTH, HEIGHT);
                 break;
-            case bug2:
+            case horn_helmet:
                 subImage = Bitmap.createBitmap(bitmapImage, 1 * WIDTH, 6 * HEIGHT, WIDTH, HEIGHT);
                 break;
-            case bug3:
+            case astro_helmet:
                 subImage = Bitmap.createBitmap(bitmapImage, 2 * WIDTH, 6 * HEIGHT, WIDTH, HEIGHT);
                 break;
-            case magnifying_glass:
+            case target:
                 subImage = Bitmap.createBitmap(bitmapImage, 3 * WIDTH, 6 * HEIGHT, WIDTH, HEIGHT);
                 break;
-            case fishes:
+            case empty2:
                 subImage = Bitmap.createBitmap(bitmapImage, 4 * WIDTH, 6 * HEIGHT, WIDTH, HEIGHT);
                 break;
-            case duck:
+            case waves:
                 subImage = Bitmap.createBitmap(bitmapImage, 5 * WIDTH, 6 * HEIGHT, WIDTH, HEIGHT);
                 break;
-            case sloth:
+            case rain:
                 subImage = Bitmap.createBitmap(bitmapImage, 6 * WIDTH, 6 * HEIGHT, WIDTH, HEIGHT);
                 break;
-            case bird:
+            case drink:
                 subImage = Bitmap.createBitmap(bitmapImage, 7 * WIDTH, 6 * HEIGHT, WIDTH, HEIGHT);
                 break;
-            case apple:
+            case paperclip:
                 subImage = Bitmap.createBitmap(bitmapImage, 8 * WIDTH, 6 * HEIGHT, WIDTH, HEIGHT);
                 break;
-            case carrot:
+            case elephant:
                 subImage = Bitmap.createBitmap(bitmapImage, 9 * WIDTH, 6 * HEIGHT, WIDTH, HEIGHT);
                 break;
-            case lemon:
+            case cowboyhat:
                 subImage = Bitmap.createBitmap(bitmapImage, 10 * WIDTH, 6 * HEIGHT, WIDTH, HEIGHT);
                 break;
-            case pepper:
+            case ballcap:
                 subImage = Bitmap.createBitmap(bitmapImage, 11 * WIDTH, 6 * HEIGHT, WIDTH, HEIGHT);
                 break;
-            case onion:
+            case flag:
                 subImage = Bitmap.createBitmap(bitmapImage, 12 * WIDTH, 6 * HEIGHT, WIDTH, HEIGHT);
                 break;
-            case potion1:
+            case bomb:
                 subImage = Bitmap.createBitmap(bitmapImage, 13 * WIDTH, 6 * HEIGHT, WIDTH, HEIGHT);
                 break;
-            case potion2:
+            case bear:
                 subImage = Bitmap.createBitmap(bitmapImage, 14 * WIDTH, 6 * HEIGHT, WIDTH, HEIGHT);
                 break;
-            case bow_and_arrow:
+            case giraffe:
                 subImage = Bitmap.createBitmap(bitmapImage, 15 * WIDTH, 6 * HEIGHT, WIDTH, HEIGHT);
                 break;
-            case campfire:
+            case bug1:
                 subImage = Bitmap.createBitmap(bitmapImage, 0 * WIDTH, 7 * HEIGHT, WIDTH, HEIGHT);
                 break;
-            case donut:
+            case bug2:
                 subImage = Bitmap.createBitmap(bitmapImage, 1 * WIDTH, 7 * HEIGHT, WIDTH, HEIGHT);
                 break;
-            case monitor:
+            case bug3:
                 subImage = Bitmap.createBitmap(bitmapImage, 2 * WIDTH, 7 * HEIGHT, WIDTH, HEIGHT);
+                break;
+            case magnifying_glass:
+                subImage = Bitmap.createBitmap(bitmapImage, 3 * WIDTH, 7 * HEIGHT, WIDTH, HEIGHT);
+                break;
+            case fishes:
+                subImage = Bitmap.createBitmap(bitmapImage, 4 * WIDTH, 7 * HEIGHT, WIDTH, HEIGHT);
+                break;
+            case duck:
+                subImage = Bitmap.createBitmap(bitmapImage, 5 * WIDTH, 7 * HEIGHT, WIDTH, HEIGHT);
+                break;
+            case sloth:
+                subImage = Bitmap.createBitmap(bitmapImage, 6 * WIDTH, 7 * HEIGHT, WIDTH, HEIGHT);
+                break;
+            case bird:
+                subImage = Bitmap.createBitmap(bitmapImage, 7 * WIDTH, 7 * HEIGHT, WIDTH, HEIGHT);
+                break;
+            case apple:
+                subImage = Bitmap.createBitmap(bitmapImage, 8 * WIDTH, 7 * HEIGHT, WIDTH, HEIGHT);
+                break;
+            case carrot:
+                subImage = Bitmap.createBitmap(bitmapImage, 9 * WIDTH, 7 * HEIGHT, WIDTH, HEIGHT);
+                break;
+            case lemon:
+                subImage = Bitmap.createBitmap(bitmapImage, 10 * WIDTH, 7 * HEIGHT, WIDTH, HEIGHT);
+                break;
+            case pepper:
+                subImage = Bitmap.createBitmap(bitmapImage, 11 * WIDTH, 7 * HEIGHT, WIDTH, HEIGHT);
+                break;
+            case onion:
+                subImage = Bitmap.createBitmap(bitmapImage, 12 * WIDTH, 7 * HEIGHT, WIDTH, HEIGHT);
+                break;
+            case potion1:
+                subImage = Bitmap.createBitmap(bitmapImage, 13 * WIDTH, 7 * HEIGHT, WIDTH, HEIGHT);
+                break;
+            case potion2:
+                subImage = Bitmap.createBitmap(bitmapImage, 14 * WIDTH, 7 * HEIGHT, WIDTH, HEIGHT);
+                break;
+            case bow_and_arrow:
+                subImage = Bitmap.createBitmap(bitmapImage, 15 * WIDTH, 7 * HEIGHT, WIDTH, HEIGHT);
+                break;
+            case campfire:
+                subImage = Bitmap.createBitmap(bitmapImage, 0 * WIDTH, 8 * HEIGHT, WIDTH, HEIGHT);
+                break;
+            case donut:
+                subImage = Bitmap.createBitmap(bitmapImage, 1 * WIDTH, 8 * HEIGHT, WIDTH, HEIGHT);
+                break;
+            case monitor:
+                subImage = Bitmap.createBitmap(bitmapImage, 2 * WIDTH, 8 * HEIGHT, WIDTH, HEIGHT);
                 break;
         }
         return subImage;

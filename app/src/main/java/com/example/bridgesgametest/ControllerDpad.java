@@ -90,7 +90,6 @@ public class ControllerDpad extends Fragment {
                 return false;
             }
         });
-
         return v;
     }
 
