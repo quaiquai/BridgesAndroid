@@ -6,7 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 
 public class BufferedStart extends AppCompatActivity {
 
-    BugStomp bs;
+    // Game objects
+    //BugStomp bs;
     Snake sn;
 
     @Override
@@ -21,10 +22,10 @@ public class BufferedStart extends AppCompatActivity {
         super.onResume();
 
         /**
-        bs = new BugStomp();
-        bs.handleFragment(this); // this must be called before the students main method
-        bs.main();
-         **/
+        bs = new BugStomp(); // Initialize game object.
+        bs.handleFragment(this); // This must be called before any game method.
+        bs.main(); // Start the students game. **/
+
         sn = new Snake();
         sn.handleFragment(this);
         sn.main();
