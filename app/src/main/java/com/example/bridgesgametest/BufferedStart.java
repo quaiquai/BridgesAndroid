@@ -9,7 +9,6 @@ public class BufferedStart extends AppCompatActivity {
     BugStomp bs;
     Snake sn;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
