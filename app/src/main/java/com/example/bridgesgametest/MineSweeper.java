@@ -1,7 +1,7 @@
 package com.example.bridgesgametest;
 
 public class MineSweeper {
-/**
+/**UNDER CONSTRUCTION: NOT READY FOR END USER
     // set up default colors, symbols, positions, and sizes for the game grid
     static int numRows = 5;
     static int numCols = 5;

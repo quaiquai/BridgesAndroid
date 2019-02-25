@@ -1,17 +1,33 @@
 package com.example.bridgesgametest;
 
+import android.content.Context;
+import android.support.v7.app.AppCompatActivity;
+
 import org.json.JSONObject;
 
 import java.util.Queue;
 
 public class BlockingGame {
-    /**
+/**UNDER CONSTRUCTION: NOT READY FOR END USER
+    AppCompatActivity a;
+    Context c;
+    GameGrid gg;
+    ControllerDpad dp;
+    ControllerXY xy;
+
     boolean firsttime;
     //Bridges bridges;
-    GameGrid gg;
     //SocketConnection sock;
 
     Queue<String> keyqueue;
+
+    public void handleFragment(Context con){
+        c = con;
+        a = (AppCompatActivity) c;
+        gg = (GameGrid) a.getSupportFragmentManager().findFragmentById(R.id.GridFragment);
+        dp = (ControllerDpad) a.getSupportFragmentManager().findFragmentById(R.id.Dpad);
+        xy =(ControllerXY) a.getSupportFragmentManager().findFragmentById(R.id.XY);
+    }
 
     public void keypress(JSONObject keypress) {
         String type = "";
@@ -19,10 +35,10 @@ public class BlockingGame {
 
         // get keypress details
         try {
-            //type = (String) keypress.get("type");
-            //key = (String) keypress.get("key");
+            type = (String) keypress.get("type");
+            key = (String) keypress.get("key");
 
-            // System.out.println(type + ": " + key);
+            System.out.println(type + ": " + key);
 
         } catch (Exception JSONe) {
             //e.printStackTrace();
@@ -30,9 +46,9 @@ public class BlockingGame {
 
         if (type.equals("keydown")) {
             synchronized (keyqueue) {
-                // System.err.println(type+" "+key);
-                //keyqueue.add(key);
-                //keyqueue.notify();
+                System.err.println(type+" "+key);
+                keyqueue.add(key);
+                keyqueue.notify();
             }
         }
 
@@ -45,12 +61,12 @@ public class BlockingGame {
         synchronized (keyqueue) {
 
             try {
-                //keyqueue.wait();
+                keyqueue.wait();
             } catch (Exception ie) {
 
             }
 
-            //ret = keyqueue.poll();
+            ret = keyqueue.poll();
         }
 
         return ret;
@@ -60,8 +76,7 @@ public class BlockingGame {
         return gg;
     }
 
-    public BlockingGame(int assignmentID, String username, String apikey,
-                        int gridsizeX, int gridsizeY) {
+    public BlockingGame() {
         firsttime = true;
 
         // bridges-sockets account (you need to make a new account:
@@ -74,12 +89,12 @@ public class BlockingGame {
         // create a new color grid with random color
         //gg = new GameGrid(gridsizeX, gridsizeY);
 
-        //keyqueue = new ArrayDeque<String>();
+        keyqueue = new ArrayDeque<String>();
 
         // set up socket connection to receive and send data
-        sock = new SocketConnection();
-        sock.setupConnection(bridges.getUserName(), bridges.getAssignment());
-        sock.addListener(this);
+        //sock = new SocketConnection();
+        //sock.setupConnection(bridges.getUserName(), bridges.getAssignment());
+        //sock.addListener(this);
 
     }
 
@@ -105,7 +120,7 @@ public class BlockingGame {
             }
         }
 
-        //String gridState = gg.getDataStructureRepresentation();
+        String gridState = gg.getDataStructureRepresentation();
         //String gridJSON = '{' + gridState;
         // System.out.println(gridJSON);
 
@@ -116,5 +131,5 @@ public class BlockingGame {
     public void quit() {
         //sock.close();
     }
-     **/
+ **/
 }
