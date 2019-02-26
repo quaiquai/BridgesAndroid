@@ -19,33 +19,37 @@ public class Pong extends NGCKGame_AndroidVersion {
     private NamedColor ballColor;
     private NamedSymbol ballSymbol;
     private boolean moveUpDown; // Value true makes the ball move down, false moves the ball up.
-    private boolean moveLeftRight; // Value true moves the ball right, value false moves the ball left.
+    private int moveLeftRightCenter; // Value 1 moves the ball right, value -1 moves the ball left, value 0 the ball moves straight up or down.
 
     // Set up the first state of the game grid.
     private void initialize() {
         // paint screen
         for (int i = 0; i < 30; ++i) {
             for (int j = 0; j < 30; ++j) {
-                SetBGColor(i, j, NamedColor.white);
+                if (i%2 == 0){
+                    SetBGColor(i, j, NamedColor.gray);
+                }else{
+                    SetBGColor(i, j, NamedColor.darkgray);
+                }
             }
         }
 
         // Draw player paddle
-        paddleSymbol = NamedSymbol.triangle_up;
+        paddleSymbol = NamedSymbol.square;
         paddleColor = NamedColor.aqua;
         grid.drawObject(loc[0], loc[1], paddleSymbol);
         grid.drawObject(loc[0], loc[1] + 1, paddleSymbol);
         grid.drawObject(loc[0], loc[1] + 2, paddleSymbol);
 
         // Draw computer paddle
-        compPaddleSymbol = NamedSymbol.triangle_up;
+        compPaddleSymbol = NamedSymbol.square;
         compPaddleColor = NamedColor.aqua;
         grid.drawObject(compLoc[0], compLoc[1], compPaddleSymbol);
         grid.drawObject(compLoc[0], compLoc[1] + 1, compPaddleSymbol);
         grid.drawObject(compLoc[0], compLoc[1] + 2, compPaddleSymbol);
 
         // Draw ball
-        ballSymbol = NamedSymbol.triangle_up;
+        ballSymbol = NamedSymbol.circle;
         ballColor = NamedColor.aqua;
         grid.drawObject(ballLoc[0], ballLoc[1], ballSymbol);
     }
@@ -80,12 +84,12 @@ public class Pong extends NGCKGame_AndroidVersion {
             if (ballLoc[1] == compLoc[1] || ballLoc[1] == (compLoc[1] + 1) || ballLoc[1] == (compLoc[1] + 2)) { // Check for collision with computer paddle.
                 if (compLoc[1] < compPrevLoc[1]) { // If the computers paddle is moving left ball bounces right.
                     ballLoc[1]++;
-                    moveLeftRight = true;
+                    moveLeftRightCenter = 1;
                 } else if (compLoc[1] > compPrevLoc[1]) { // If the computers paddle is moving right ball bounces left.
                     ballLoc[1]--;
-                    moveLeftRight = false;
+                    moveLeftRightCenter = -1;
                 } else { // If the computers paddle is not moving when the ball collides the ball is not pushed in either direction.
-
+                    moveLeftRightCenter = 0;
                 }
             } else { // If the ball reaches x:0 on the grid and doesn't hit the computers paddle player wins.
                 // win
@@ -96,12 +100,12 @@ public class Pong extends NGCKGame_AndroidVersion {
             if (ballLoc[1] == loc[1] || ballLoc[1] == (loc[1] + 1) || ballLoc[1] == (loc[1] + 2)) { // Check for collision with player paddle.
                 if (loc[1] < prevLoc[1]) { // If the players paddle is moving left ball bounces right.
                     ballLoc[1]++;
-                    moveLeftRight = true;
+                    moveLeftRightCenter = 1;
                 } else if (loc[1] > prevLoc[1]) { // If the players paddle is moving right ball bounces left.
                     ballLoc[1]--;
-                    moveLeftRight = false;
+                    moveLeftRightCenter = -1;
                 } else { // If the players paddle is not moving when the ball collides the ball is not pushed in either direction.
-
+                    moveLeftRightCenter = 0;
                 }
             } else { // If the ball reaches x:29 on the grid and doesn't hit the players paddle computer wins.
                 // lose
@@ -115,17 +119,19 @@ public class Pong extends NGCKGame_AndroidVersion {
             }
 
             if (ballLoc[1] == 0) { // Ball bounces off the left side of the grid
-                moveLeftRight = true;
+                moveLeftRightCenter = 1;
             }
             if (ballLoc[1] == 29) { // Ball bounces off the right side of the grid
-                moveLeftRight = false;
+                moveLeftRightCenter = -1;
             }
 
             // Continues moving the ball in the direction it has been pushed. Either by the paddles or from bouncing off the wall of the grid.
-            if (moveLeftRight) {
+            if (moveLeftRightCenter == 1) {
                 ballLoc[1]++;
-            } else {
+            } else if (moveLeftRightCenter == -1) {
                 ballLoc[1]--;
+            }else{
+                // ball moves directly up or down
             }
         }
 
