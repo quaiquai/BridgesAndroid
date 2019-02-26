@@ -15,10 +15,11 @@ public class Pong extends NGCKGame_AndroidVersion {
 
     // Values for the ball
     private int[] ballLoc = {15, 15};
+    private int[] ballPrevLoc = {14, 14};
     private NamedColor ballColor;
     private NamedSymbol ballSymbol;
-    private int moveUpDown = 1; // Value 1 makes the ball move down, -1 moves the ball up.
-    private int moveLeftRight = 1; // Value 1 makes the ball move right, -1 moves the ball left, 0 means the ball will not move left or right.
+    private boolean moveUpDown; // Value true makes the ball move down, false moves the ball up.
+    private boolean moveLeftRight; // Value true moves the ball right, value false moves the ball left.
 
     // Set up the first state of the game grid.
     private void initialize() {
@@ -69,45 +70,66 @@ public class Pong extends NGCKGame_AndroidVersion {
 
     public void handleBall() {
 
-        if (ballLoc[0] == 0) { // Ball has reached top of the board
-            if (ballLoc[1] == compLoc[1] || ballLoc[1] == (compLoc[1] + 1) || ballLoc[1] == (compLoc[1] + 2)) { // Check for collision
-                moveUpDown = 1;
-                if (compLoc[1] < compPrevLoc[1]) { // If the computers paddle is moving left ball bounces right
-                    moveLeftRight = 1;
-                } else if (compLoc[1] > compPrevLoc[1]) { // If the computers paddle is moving right ball bounces left
-                    moveLeftRight = -1;
+        ballPrevLoc[0] = ballLoc[0]; // Set prev location val.
+        ballPrevLoc[1] = ballLoc[1]; // Set prev location val.
+        removeObject(ballPrevLoc[0], ballPrevLoc[1]); // Erase ball object from prev location.
+
+        if (ballLoc[0] == 1) { // Ball has reached top of the board.
+            ballLoc[0]++;
+            moveUpDown = true;
+            if (ballLoc[1] == compLoc[1] || ballLoc[1] == (compLoc[1] + 1) || ballLoc[1] == (compLoc[1] + 2)) { // Check for collision with computer paddle.
+                if (compLoc[1] < compPrevLoc[1]) { // If the computers paddle is moving left ball bounces right.
+                    ballLoc[1]++;
+                    moveLeftRight = true;
+                } else if (compLoc[1] > compPrevLoc[1]) { // If the computers paddle is moving right ball bounces left.
+                    ballLoc[1]--;
+                    moveLeftRight = false;
                 } else { // If the computers paddle is not moving when the ball collides the ball is not pushed in either direction.
-                    moveLeftRight = 0;
+
                 }
             } else { // If the ball reaches x:0 on the grid and doesn't hit the computers paddle player wins.
                 // win
             }
-        } else if (ballLoc[0] == 29) { // Ball has reached bottom of the board
-            if (ballLoc[1] == loc[1] || ballLoc[1] == (loc[1] + 1) || ballLoc[1] == (loc[1] + 2)) { // Check for collision
-                moveUpDown = -1;
-                if (loc[1] < prevLoc[1]) { // If the players paddle is moving left ball bounces right
-                    moveLeftRight = 1;
-                } else if (loc[1] > prevLoc[1]) { // If the players paddle is moving right ball bounces left
-                    moveLeftRight = -1;
+        } else if (ballLoc[0] == 28) { // Ball has reached bottom of the grid.
+            ballLoc[0]--;
+            moveUpDown = false;
+            if (ballLoc[1] == loc[1] || ballLoc[1] == (loc[1] + 1) || ballLoc[1] == (loc[1] + 2)) { // Check for collision with player paddle.
+                if (loc[1] < prevLoc[1]) { // If the players paddle is moving left ball bounces right.
+                    ballLoc[1]++;
+                    moveLeftRight = true;
+                } else if (loc[1] > prevLoc[1]) { // If the players paddle is moving right ball bounces left.
+                    ballLoc[1]--;
+                    moveLeftRight = false;
                 } else { // If the players paddle is not moving when the ball collides the ball is not pushed in either direction.
-                    moveLeftRight = 0;
+
                 }
             } else { // If the ball reaches x:29 on the grid and doesn't hit the players paddle computer wins.
                 // lose
             }
+        } else { // This is reached when the ball is not interacting with either paddle or the top and bottom of the grid.
+
+            if (moveUpDown) { // Continues moving the ball away from the computers paddle.
+                ballLoc[0]++;
+            } else if (!moveUpDown) { // Continues moving the ball away from the players paddle.
+                ballLoc[0]--;
+            }
+
+            if (ballLoc[1] == 0) { // Ball bounces off the left side of the grid
+                moveLeftRight = true;
+            }
+            if (ballLoc[1] == 29) { // Ball bounces off the right side of the grid
+                moveLeftRight = false;
+            }
+
+            // Continues moving the ball in the direction it has been pushed. Either by the paddles or from bouncing off the wall of the grid.
+            if (moveLeftRight) {
+                ballLoc[1]++;
+            } else {
+                ballLoc[1]--;
+            }
         }
 
-        if (ballLoc[0] == 0) { // Ball bounces off the left side of the grid
-            moveLeftRight = 1;
-        }
-        if (ballLoc[0] == 29) { // Ball bounces off the right side of the grid
-            moveLeftRight = -1;
-        }
-    }
-
-    private void moveBall() {
-        removeObject(ballLoc[0], ballLoc[1]); // Erase ball object from prev location.
-        grid.drawObject((ballLoc[0] + moveUpDown), (ballLoc[1] + moveLeftRight), ballSymbol); // Draw ball object in new location.
+        grid.drawObject((ballLoc[0]), (ballLoc[1]), ballSymbol); // Draw ball object in new location.
     }
 
     private void handleInput() {
@@ -123,23 +145,11 @@ public class Pong extends NGCKGame_AndroidVersion {
             }
     }
 
-    private void paintScreen() {
-        // paint screen
-        for (int i = 0; i < 30; ++i) {
-            for (int j = 0; j < 30; ++j) {
-                SetBGColor(i, j, NamedColor.white);
-            }
-        }
-
-        drawPlayerPaddle();
-        handleBall();
-    }
-
     // Game loop will run many times per second.
     public void GameLoop() {
         handleInput();
         drawPlayerPaddle();
-        moveBall();
+        handleBall();
     }
 
     // Called by the BufferedStart activity to begin running this game.
