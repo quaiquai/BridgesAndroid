@@ -101,4 +101,8 @@ public class GameGrid extends Fragment {
         //sprite.eraseColor(Color.rgb(r,g,b));//sets color of pixels to input rgb
         GameGrid[x][y].setColorFilter(Color.rgb(r,g,b));//sets image view to new bitmap
     }
+
+    public void clearImageView(int x, int y){
+        GameGrid[x][y].setImageDrawable(null);
+    }
 }

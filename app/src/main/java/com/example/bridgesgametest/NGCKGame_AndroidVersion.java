@@ -6,12 +6,18 @@ import android.support.v7.app.AppCompatActivity;
 
 public abstract class NGCKGame_AndroidVersion{
 
-    AppCompatActivity a;
-    Context c;
-    GameGrid grid;
-    ControllerDpad dp;
-    ControllerXY xy;
+    // Handler for loop management.
+    private Handler h = new Handler();
+    // Sets the delay for the GameLoop.
+    private int frameDelay = 100;
 
+    AppCompatActivity a; // Object for current running activity
+    Context c; // Context of current running activity
+    GameGrid grid; // Grid object
+    ControllerDpad dp; // Controller object
+    ControllerXY xy; // Controller object
+
+    // Gathers context and controller objects of currently running activity so that students code can be visualized onto it.
     public void handleFragment(Context con){
         c = con;
         a = (AppCompatActivity) c;
@@ -19,11 +25,6 @@ public abstract class NGCKGame_AndroidVersion{
         dp = (ControllerDpad) a.getSupportFragmentManager().findFragmentById(R.id.Dpad);
         xy =(ControllerXY) a.getSupportFragmentManager().findFragmentById(R.id.XY);
     }
-
-    // Handler for loop management.
-    private Handler h = new Handler();
-    // Sets the delay for the GameLoop.
-    private int frameDelay = 100;
 
     // / @return true if "left" is pressed
     protected boolean KeyLeft() {
@@ -51,24 +52,29 @@ public abstract class NGCKGame_AndroidVersion{
     // Return true if y button is pressed.
     protected boolean KeyY(){ return xy.Y(); }
 
-    // /set background color of cell x, y to c
+    // Set background color of cell x, y to c.
     protected void SetBGColor(int x, int y, NamedColor c) { grid.setBGColor(y, x, c); }
 
-    // /set foreground color of cell x, y to c
+    // Set foreground color of cell x, y to c.
     protected void SetFGColor(int x, int y, NamedColor c) {
         grid.setFGColor(y, x, c);
     }
 
-    // /set symbol of cell x, y to s
+    // Set symbol of cell x, y to s.
     protected void DrawObject(int x, int y, NamedSymbol s) {
         grid.drawObject(y, x, s);
     }
 
-    // set symbol and foreground color of cell x, y to s and c
+    // Set symbol and foreground color of cell x, y to s and c.
     protected void DrawObject(int x, int y, NamedSymbol s, NamedColor c) { grid.drawObject(y, x, s, c); }
 
+    // Removes image at x, y location.
+    protected void removeObject(int x, int y){ grid.clearImageView(x, y); }
+
+    // The student will determine what happens inside this loop.
     public abstract void GameLoop();
 
+    // A method to call the loop after a frame delay.
     public void start(){
         h.postDelayed(new Runnable(){
             public void run(){
