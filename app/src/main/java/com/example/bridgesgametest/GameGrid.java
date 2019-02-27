@@ -89,7 +89,7 @@ public class GameGrid extends Fragment {
         GameGrid[x][y].setBackgroundColor(Color.rgb(r, g, b));
     }
 
-    // Set foreground color of a grid cell using androidAPI value.
+    // Set foreground color of a grid cell using androidAPI color value.
     public void setFGColor(int x, int y, NamedColor colorHex){
         int col = colorHex.getHex();
         GameGrid[x][y].setColorFilter(col);//sets image view to new bitmap

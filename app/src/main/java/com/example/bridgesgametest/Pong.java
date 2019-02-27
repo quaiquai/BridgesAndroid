@@ -1,5 +1,9 @@
 package com.example.bridgesgametest;
 
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+
 public class Pong extends NGCKGame_AndroidVersion {
     // Values for the players paddle
     private int[] loc = {29, 0};
@@ -21,7 +25,7 @@ public class Pong extends NGCKGame_AndroidVersion {
     private boolean moveUpDown; // Value true makes the ball move down, false moves the ball up.
     private int moveLeftRightCenter; // Value 1 moves the ball right, value -1 moves the ball left, value 0 the ball moves straight up or down.
 
-    private int reactionStrategy[][] = {{1, 50, 5}, {2, 45, 10}, {3, 40, 15}, {4, 35, 20}, {5, 30, 25}, {6, 25, 30}, {7, 20, 35}, {8, 15, 40}, {9, 10, 45}};
+    private int reactionStrategy[][] = {{1, 18, 5}, {2, 17, 6}, {3, 16, 7}, {4, 15, 8}, {5, 14, 9}, {6, 13, 10}, {7, 12, 11}, {8, 11, 12}, {9, 10, 13}};
     private int compScore = 0;
     private int playerScore = 0;
     private int reactionCountdown = reactionStrategy[8][0]; // Time between moves. The longer it takes to react the worse the computer plays.
@@ -64,19 +68,19 @@ public class Pong extends NGCKGame_AndroidVersion {
     }
 
     private void drawPlayerPaddle() {
-        removeObject(prevLoc[0], prevLoc[1]);
+        removeObject(prevLoc[0], prevLoc[1]); // Remove old playerPaddle object
         removeObject(prevLoc[0], prevLoc[1] + 1);
         removeObject(prevLoc[0], prevLoc[1] + 2);
-        grid.drawObject(loc[0], loc[1], paddleSymbol);
+        grid.drawObject(loc[0], loc[1], paddleSymbol); // Draw new playerPaddle object
         grid.drawObject(loc[0], loc[1] + 1, paddleSymbol);
         grid.drawObject(loc[0], loc[1] + 2, paddleSymbol);
     }
 
     public void drawComputerPaddle() {
-        removeObject(compPrevLoc[0], compPrevLoc[1]);
+        removeObject(compPrevLoc[0], compPrevLoc[1]); // Remove old computerPaddle object
         removeObject(compPrevLoc[0], compPrevLoc[1] + 1);
         removeObject(compPrevLoc[0], compPrevLoc[1] + 2);
-        grid.drawObject(compLoc[0], compLoc[1], compPaddleSymbol);
+        grid.drawObject(compLoc[0], compLoc[1], compPaddleSymbol); // Draw new computerPaddle object
         grid.drawObject(compLoc[0], compLoc[1] + 1, compPaddleSymbol);
         grid.drawObject(compLoc[0], compLoc[1] + 2, compPaddleSymbol);
     }
@@ -217,11 +221,21 @@ public class Pong extends NGCKGame_AndroidVersion {
         }
     }
 
+    private void win(){
+
+    }
+
+    private void lose(){
+
+    }
+
     // Game loop will run many times per second.
     public void GameLoop() {
         handleInput();
         drawPlayerPaddle();
         handleBall();
+
+        ballSymbol.setColor(ballColor);
 
         if (reactionCountdown <= 0) {
             handleComputerInput();

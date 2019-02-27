@@ -1,8 +1,10 @@
 package com.example.bridgesgametest;
 
-import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
 
 public enum NamedSymbol {
     none,
@@ -138,12 +140,12 @@ public enum NamedSymbol {
     monitor;
 
     // Objects for sprite sheet and selected sprite.
-    private Bitmap bitmapImage;
-    private Bitmap subImage;
+    public Bitmap bitmapImage;
+    public Bitmap subImage;
 
     //width and height for the sprite sheet
-    private int WIDTH;
-    private int HEIGHT;
+    public int WIDTH;
+    public int HEIGHT;
 
     public Bitmap setSprite(Bitmap spriteSheet) {
 
@@ -554,5 +556,18 @@ public enum NamedSymbol {
                 break;
         }
         return subImage;
+    }
+
+    // Using NamedSymbol.setColor(NamedColor), the user can change the base color of the bitmap.
+    // This bitmap being displayed in an ImageView with a setFGColor() will filter this color while it is
+    // inside that ImageView. However, its base color will remain the same and will be shown when it moves out
+    // of the filtered ImageView.
+    public void setColor(NamedColor color){
+
+        Paint p = new Paint();
+        p.setColorFilter(new PorterDuffColorFilter(color.getHex(), PorterDuff.Mode.SRC_IN));
+        Canvas c = new Canvas(this.subImage);
+        c.drawBitmap(this.subImage, 0, 0, p);
+
     }
 }

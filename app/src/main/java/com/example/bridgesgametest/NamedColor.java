@@ -151,10 +151,10 @@ public enum NamedColor {
     yellow,
     yellowgreen;
 
-    private int colorHex;
-    private int colorRed;
-    private int colorGreen;
-    private int colorBlue;
+    public int colorHex;
+    public int colorRed;
+    public int colorGreen;
+    public int colorBlue;
 
     public int getHex(){
         setValues(this);
