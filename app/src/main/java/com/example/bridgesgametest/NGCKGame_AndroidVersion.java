@@ -1,8 +1,6 @@
 package com.example.bridgesgametest;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 
@@ -85,6 +83,10 @@ public abstract class NGCKGame_AndroidVersion {
 
     // The student will determine what happens inside this loop.
     public abstract void GameLoop();
+
+    public void stop(){
+        h.removeMessages(0);
+    }
 
     // A method to call the loop after a frame delay.
     public void start() {
