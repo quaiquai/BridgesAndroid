@@ -113,7 +113,7 @@ public class Pong extends NGCKGame_AndroidVersion {
         ballPrevLoc[1] = ballLoc[1]; // Set prev location val.
         removeObject(ballPrevLoc[0], ballPrevLoc[1]); // Erase ball object from prev location.
 
-        if (ballLoc[0] == 1) { // Ball has reached top of the board.
+        if (ballLoc[0] == -1) { // Ball has reached top of the board.
             if (ballLoc[1] == compLoc[1] || ballLoc[1] == (compLoc[1] + 1) || ballLoc[1] == (compLoc[1] + 2)) { // Check for collision with computer paddle.
                 if (compLoc[1] < compPrevLoc[1]) { // If the computers paddle is moving left on collision ball bounces right.
                     ballLoc[1]++;
